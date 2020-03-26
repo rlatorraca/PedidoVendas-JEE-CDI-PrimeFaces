@@ -1,0 +1,75 @@
+@charset "utf-8";
+
+body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+}
+
+header {
+	padding: 5px 0px;
+	margin-bottom: 20px;
+	height: 80px;
+	
+	background-color: #262626;
+	color: #fff;
+	
+	box-shadow: 0px 2px 2px #ccc;
+}
+
+header > div {
+	margin-left: 5px
+}
+
+#conteudo {
+	padding: 0px 10px
+}
+
+footer {
+	padding: 0px 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#login-dialog {
+	width: 300px;
+	margin: auto;
+	margin-top: 150px;
+}
+
+#login-dialog > h1{
+	text-align: center;
+	font-weight: 700;
+}
+
+#login-dialog > p {
+	text-align: center;
+	font-weight: 700;
+	font-size: 12px;
+}
+
+.grid-login {
+	background-color: #f2f2f2;
+	border-radius: 10px;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	padding: 10px
+}
+
+.rotulo {
+	width: 150px
+}
+
+.ui-panelgrid td {
+	height: 35px
+}
+
+.ajax-status {
+	position: fixed;
+	top: 100px;
+	right: 10px;
+	width: 35px;
+	height: 35px
+}

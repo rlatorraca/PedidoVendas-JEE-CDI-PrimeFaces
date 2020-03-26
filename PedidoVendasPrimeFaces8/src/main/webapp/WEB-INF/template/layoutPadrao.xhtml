@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">RLSP - Sistema de Vendas</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css"></h:outputStylesheet>
+	 <h:outputScript library="js" name="jquery.maskMoney.js"/>
+</h:head>
+
+<h:body>
+	<!-- AJAX Gif -->
+	<!-- onsuccess="configureMoeda() ==> chama a funcao js para reconfigurar o campo js com $$$ -->
+	<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()">
+			<f:facet name="start">
+				<h:graphicImage library="images" name="carregando.gif"/>
+			</f:facet>
+			<f:facet name="complete">
+				<h:outputText value=""/>
+			</f:facet>
+	</p:ajaxStatus>
+		
+	<header>
+		<div>
+			<h:link>
+				<h:graphicImage library="images" name="RLSProject-Logo.png"/>
+			</h:link>
+		</div>
+	</header>
+	
+	<div id="conteudo">
+		<ui:insert name="corpo"/>
+	</div>
+	
+	<p:separator style="margin-top: 20px"></p:separator>
+	<footer>
+		Sistema de Vendas RLSP (Jakarta EE, CDI, JPA e PrimeFaces 8.0- <a href="http://www.rlsp.com.br" target="_blank">http://wwww.rlsprojects.com.br</a>
+	</footer>
+	
+	<script>
+			function configurarMoeda() {
+				$(".moeda").maskMoney({ decimal: ",", thousands: ".", allowZero: true });
+			}
+			
+			$(document).ready(function() {
+				configurarMoeda();
+			});
+	</script>
+</h:body>
+
+</html>
