@@ -18,7 +18,7 @@
 	    		</p:toolbarGroup>
 	    		
 	    		<p:toolbarGroup align="right">
-	    			<p:button value="Novo" outcome="/produtos/CadastroProduto.xhtml" />
+	    			<p:button value="Novo" outcome="/produtos/CadastroProduto" />
 	    		</p:toolbarGroup>
 	    	</p:toolbar>
 	    	
@@ -51,8 +51,12 @@
 	    			<h:outputText value="98" />
 	    		</p:column>
 	    		<p:column headerText="Ações" style="width: 100px; text-align: center">
-	    			<p:button icon="ui-icon-pencil" title="Editar"/>		 <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA -->
-	    			<p:commandButton icon="ui-icon-trash" title="Excluir"  /> <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa actionListener -->
+	    			<p:button icon="ui-icon-pencil" title="Editar"/>		 <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir"  /> <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
+	    			<!-- O outcome funciona como um link. Se você quer só direcionar o usuário para uma página, pode usar isso.Geralmente a gente usa action para executar 
+	    			      um método no managed bean que pode direcionar o usuário para outra view dependendo do resultado (ou pode permanecer na mesma página).
+						  ActionListener é usado mais para quando você quer executar alguma coisa antes do action, por exemplo, você poderia usar para registrar o log de 
+						  alguma coisa, verificar se o usuário tem permissão, etc. -->
 	    		</p:column>
 	    	</p:dataTable>
     	</h:form>

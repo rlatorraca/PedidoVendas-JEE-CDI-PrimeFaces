@@ -73,3 +73,36 @@ footer {
 	width: 35px;
 	height: 35px
 }
+
+.ui-selectmanycheckbox td {
+	border-width: 0px !important;
+	padding: 0px !important;
+}
+
+.ui-selectmanycheckbox td label {
+	padding-right: 10px;
+}
+
+/*Configura o AUTOCOMPLETO do campo Produto de template/pedidos/ItensPedido*/
+.ui-autocomplete {
+   width: 99%;
+}
+
+/* Customiza TabView - início */
+.ui-tabs .ui-tabs-panel {
+    padding: 0.5em 0.2em !important;
+}
+
+.ui-tabs {
+    padding: 0px !important;
+}
+
+.ui-tabs .ui-tabs-nav {
+    margin: -1px !important;
+}
+
+.ui-tabs.ui-tabs-top > .ui-tabs-nav {
+    padding: 0px !important;
+}
+/* Customiza TabView - fim */
+

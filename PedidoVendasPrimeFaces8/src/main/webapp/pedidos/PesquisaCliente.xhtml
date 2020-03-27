@@ -1,0 +1,63 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Pesquisa de pedidos</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form>
+	    	<h1>Pesquisa de Clientes</h1>
+	    	
+	    	<!-- ToolBar -->
+	    	<p:toolbar style="margin-top: 20px; margin-bottom: 20px; padding: 5px">
+	    	
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Pesquisar" />
+	    		</p:toolbarGroup>
+	    	
+	    		<p:toolbarGroup align="right">
+	    			<p:button value="Novo" />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<!-- Panel Grid -->
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+	    	
+	    	 	<p:outputLabel value="CPF/CNPJ" for="cpfcnpj"/>
+             	<p:inputMask id="cpfcnpj" value="" mask="99.999.999/9999-99" required="false"/>           	
+
+	    		
+	    		<p:outputLabel value="Nome" />
+	    		<p:inputText size="100" />
+	    	
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="pedidosTable" value="" var=""
+	    		style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
+	    		rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		<p:column headerText="Nome" style="text-align: left; width: 70%">
+	    			<h:outputText value="Supermercado Joao das Counves"/>	    			
+	    		</p:column>
+	    		<p:column headerText="Tipo"  style="text-align: left; width: 15%">
+	    			<h:outputText value="Pessoa Jurídica"/>
+	    		</p:column>
+	    		<p:column headerText="CPF/CNPJ"  style="text-align: left; width: 20%">
+	    			<h:outputText value="02.493.738/0001-83"/>
+	    		</p:column>
+	    		<p:column style="text-align: center; width: 50px">  <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
+	    			<p:button icon="ui-icon-pencil" title="Editar"/> <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
+	    			
+	    			<!-- O outcome funciona como um link. Se você quer só direcionar o usuário para uma página, pode usar isso.Geralmente a gente usa action para executar 
+	    			      um método no managed bean que pode direcionar o usuário para outra view dependendo do resultado (ou pode permanecer na mesma página).
+						  ActionListener é usado mais para quando você quer executar alguma coisa antes do action, por exemplo, você poderia usar para registrar o log de 
+						  alguma coisa, verificar se o usuário tem permissão, etc. -->
+						  
+	    		</p:column> 
+	    	</p:dataTable>
+	    	
+    	</h:form>
+    </ui:define>
+</ui:composition>
