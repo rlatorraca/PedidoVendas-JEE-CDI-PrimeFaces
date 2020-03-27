@@ -51,6 +51,23 @@
 			<p:outputLabel value="Confirme a senha" for="confirmacaoSenha" />
 			<p:password id="confirmacaoSenha" required="true" />
 		</p:panelGrid>
+		
+		<p:selectOneMenu style="margin-top: 20px; height: 30px; margin-right: 15px; font-size: 12px" id="grupoUsuario">
+    		<f:selectItem itemLabel="Selecione o grupo"/>
+    	</p:selectOneMenu>
+		<p:commandButton style="margin-top: 20px; height: 30px;" value="Adicionar Grupo" id="adicionarGrupo"></p:commandButton>
+		
+		<p:dataTable id="pedidosTable" value="#{pesquisaPedidosBean.pedidosFiltrados}" var="pedido"
+	    		style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
+	    		rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		<p:column headerText="Grupo" style="text-align: left; width: 95%">
+	    			<h:outputText value="12345"/>
+	    		</p:column>
+	    		
+	    		<p:column headerText="Ações" style="text-align: center; width: 5%">  
+	    			<p:button icon="ui-icon-close" title="Excluir"/> 
+	    		</p:column>
+	    </p:dataTable>		
 
 	</ui:define>
 

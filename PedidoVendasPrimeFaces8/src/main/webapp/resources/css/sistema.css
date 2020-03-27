@@ -106,3 +106,6 @@ footer {
 }
 /* Customiza TabView - fim */
 
+#grupoUsuario_label {
+	padding: 8px !important;
+}

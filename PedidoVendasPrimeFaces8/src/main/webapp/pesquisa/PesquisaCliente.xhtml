@@ -44,12 +44,12 @@
 	    		<p:column headerText="Tipo"  style="text-align: left; width: 15%">
 	    			<h:outputText value="Pessoa Jurídica"/>
 	    		</p:column>
-	    		<p:column headerText="CPF/CNPJ"  style="text-align: left; width: 20%">
+	    		<p:column headerText="CPF/CNPJ"  style="text-align: left; width: 15%">
 	    			<h:outputText value="02.493.738/0001-83"/>
 	    		</p:column>
-	    		<p:column style="text-align: center; width: 50px">  <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
+	    		<p:column headerText="Ações"  style="text-align: center; width: 10%">  <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
 	    			<p:button icon="ui-icon-pencil" title="Editar"/> <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
-	    			
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir"  />
 	    			<!-- O outcome funciona como um link. Se você quer só direcionar o usuário para uma página, pode usar isso.Geralmente a gente usa action para executar 
 	    			      um método no managed bean que pode direcionar o usuário para outra view dependendo do resultado (ou pode permanecer na mesma página).
 						  ActionListener é usado mais para quando você quer executar alguma coisa antes do action, por exemplo, você poderia usar para registrar o log de 

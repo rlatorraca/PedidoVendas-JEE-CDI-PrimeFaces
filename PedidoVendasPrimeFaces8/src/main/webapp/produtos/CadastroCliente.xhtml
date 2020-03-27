@@ -50,6 +50,33 @@
              <h:outputLabel for="email" value="Email:" />
              <p:inputText id="email1" value="" />
 		</p:panelGrid>
+		
+		<p:commandButton style="margin-top: 20px; height: 34px;" value="Adicionar Endereço" id="adicionarEndereco"></p:commandButton>
+			
+		<p:dataTable id="enderecoAdicionadoTable" value="" var=""
+	    		style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
+	    		rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		<p:column headerText="Logradouro" style="text-align: left; width: 30%">
+	    			<h:outputText value="Rua das Pedras Grandes Azuis"/>	    			
+	    		</p:column>
+	    		<p:column headerText="Número"  style="text-align: left; width: 5%">
+	    			<h:outputText value="12345678"/>
+	    		</p:column>
+	    		<p:column headerText="Complemento"  style="text-align: left; width: 15%">
+	    			<h:outputText value="Ed Marrackech apt 505"/>
+	    		</p:column>
+	    	    <p:column headerText="CEP"  style="text-align: left; width: 5%">
+	    			<h:outputText value="77.888-999"/>
+	    		</p:column>
+	    		<p:column headerText="Cidade/UF"  style="text-align: left; width: 10%">
+	    			<h:outputText value="Sao Jose do trocentos Marcos/MT"/>
+	    		</p:column>
+	    		<p:column headerText="Ações"  style="text-align: center; width: 10%">  <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
+	    			<p:button icon="ui-icon-pencil" title="Editar"/> <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir"  />
+	    									  
+	    		</p:column> 
+	    	</p:dataTable>
 
 	</ui:define>
 
