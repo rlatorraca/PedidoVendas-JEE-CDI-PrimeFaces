@@ -20,7 +20,7 @@
 			
 				<!--Incluir Novo Produto ==> chama a propria pagina, logo sera apagado os dados da pagina e ficara pronta para nova insercao -->
 				<!-- outcome ==> para dever ir ao clicar -->
-				<p:button value="Novo" outcome="/produtos/CadastroUsuario"/>
+				<p:button value="Novo" outcome="/usuarios/CadastroUsuario"/>
 				<!-- Botao para SALVAR um novo produto -->
 				<p:commandButton value="Salvar" id="botaoSalvar"></p:commandButton>
 				
@@ -65,9 +65,14 @@
 	    		</p:column>
 	    		
 	    		<p:column headerText="Ações" style="text-align: center; width: 5%">  
-	    			<p:button icon="ui-icon-close" title="Excluir"/> 
+	    			<p:button icon="ui-icon-close" title="Excluir"  oncomplete="PF('confirmacaoExclusaoUsuario').show();"/> 
 	    		</p:column>
 	    </p:dataTable>		
+
+		<p:confirmDialog header="Exclusão de Usuario" message="Tem certeza que deseja excluir o 'Usuario'?" widgetVar="confirmacaoExclusaoUsuario">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusaoUsuario').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusaoUsuario').hide();" />
+	    	</p:confirmDialog>
 
 	</ui:define>
 

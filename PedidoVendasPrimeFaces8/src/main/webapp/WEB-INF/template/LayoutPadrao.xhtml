@@ -26,11 +26,36 @@
 	</p:ajaxStatus>
 		
 	<header>
-		<div>
-			<h:link>
+		<div style="float : left">
+			<h:link outcome="/Home">
 				<h:graphicImage library="images" name="RLSProject-Logo.png"/>
 			</h:link>
 		</div>
+		
+		<div style="float : right; margin-right: 100px; margin-top : 20px">
+			<span style="float : left; height: 50px; line-height : 30px; margin-right: 70px; margin-top: 5px;">
+			Olá Usuario
+			</span>
+			<h:form style="display : inline-block">
+				<p:menubar>
+					<p:submenu label="Cadastros">
+						<p:menuitem value="Clientes" outcome="/clientes/CadastroCliente"/>
+						<p:menuitem value="Usuários" outcome="/usuarios/CadastroUsuario"/>
+						<p:menuitem value="Categorias"/>
+						<p:separator></p:separator>
+						<p:menuitem value="Produtos" outcome="/produtos/PesquisaProduto"/>
+					</p:submenu>
+					
+					<p:submenu label="Pedidos">
+						<p:menuitem value="Novo Pedido" outcome="/pedidos/CadastroPedido"></p:menuitem>
+						<p:menuitem value="Pesquisa Pedido" outcome="/pedidos/PesquisaPedidos"></p:menuitem>
+					</p:submenu>
+					<p:menuitem value="Sair"></p:menuitem>
+				</p:menubar>
+			</h:form>
+		</div>
+		
+		<div style="clear: both"></div>
 	</header>
 	
 	<div id="conteudo">

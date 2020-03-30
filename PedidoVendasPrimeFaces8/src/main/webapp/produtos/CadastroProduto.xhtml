@@ -9,7 +9,8 @@
 	<ui:define name="titulo">Novo Produto</ui:define>
 	
 	<ui:define name="corpo">
-	
+	 <h:form>
+	 
 		<h1>Novo produto</h1>
 		
 		<!-- Grupos de Barras de Ferramentas -->
@@ -22,13 +23,13 @@
 				<!-- outcome ==> para dever ir ao clicar -->
 				<p:button value="Novo" outcome="/produtos/CadastroProduto"/>
 				<!-- Botao para SALVAR um novo produto -->
-				<p:commandButton value="Salvar" id="botaoSalvar"></p:commandButton>
+				<p:commandButton value="Salvar" id="botaoSalvar" ajax="true" action="#{cadastroProdutoBean.salvar}"></p:commandButton>
 				
 			</p:toolbarGroup>
 			
 			<!-- Parte Direita da Barra -->
 			<p:toolbarGroup align="right">
-				<p:button value="Pesquisa" outcome="/pesquisa/PesquisaProduto.xhtml"></p:button>
+				<p:button value="Pesquisa" outcome="/produtos/PesquisaProduto"></p:button>
 			</p:toolbarGroup>
 		</p:toolbar>		
 		
@@ -56,7 +57,7 @@
     		<p:outputLabel value="Estoque" for="estoque"/>
     		<p:inputText id="estoque" size="10" maxlength="4"/>
 		</p:panelGrid>
-
+		</h:form>
 	</ui:define>
 
 </ui:composition>

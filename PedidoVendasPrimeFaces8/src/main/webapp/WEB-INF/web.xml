@@ -35,4 +35,12 @@
 		<param-name>primefaces.SUBMIT</param-name>
 		<param-value>partial</param-value>
 	</context-param>
+	
+	
+	<!-- Handle JSF page expirations gracefully 
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>        
+		<location>/Home.xhtml</location>
+	</error-page> -->
+	
 </web-app>

@@ -52,13 +52,19 @@
 	    		</p:column>
 	    		<p:column headerText="Ações" style="width: 100px; text-align: center">
 	    			<p:button icon="ui-icon-pencil" title="Editar"/>		 <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
-	    			<p:commandButton icon="ui-icon-trash" title="Excluir"  /> <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusaoProduto').show()"  /> <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
 	    			<!-- O outcome funciona como um link. Se você quer só direcionar o usuário para uma página, pode usar isso.Geralmente a gente usa action para executar 
 	    			      um método no managed bean que pode direcionar o usuário para outra view dependendo do resultado (ou pode permanecer na mesma página).
 						  ActionListener é usado mais para quando você quer executar alguma coisa antes do action, por exemplo, você poderia usar para registrar o log de 
 						  alguma coisa, verificar se o usuário tem permissão, etc. -->
 	    		</p:column>
 	    	</p:dataTable>
+	    	
+	    	<p:confirmDialog header="Exclusão de produto" message="Tem certeza que deseja excluir o 'Produto'?" widgetVar="confirmacaoExclusaoProduto">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusaoProduto').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusaoProduto').hide();" />
+	    	</p:confirmDialog>
+	    	
     	</h:form>
     </ui:define>
 </ui:composition>

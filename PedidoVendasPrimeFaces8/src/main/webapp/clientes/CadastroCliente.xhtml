@@ -1,0 +1,140 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<script>
+	//args ==> variavel do PrimeFaces
+		function tratarInclusaoCliente(args) {
+			if (!args.validationFailed) {
+				PF('inclusaoCliente').hide();
+			}
+		}
+	</script>
+	
+	<!-- titulo pagina -->
+	<ui:define name="titulo">Novo Cliente</ui:define>
+	
+	<ui:define name="corpo">
+	
+		<h1>Novo Cliente</h1>
+		
+		<!-- Grupos de Barras de Ferramentas -->
+		<p:toolbar style="margin-top: 20px; margin-bottom: 20px; padding: 5px">
+			
+			<!-- Parte Esquerda da Barra -->
+			<p:toolbarGroup>
+			
+				<!--Incluir Novo Produto ==> chama a propria pagina, logo sera apagado os dados da pagina e ficara pronta para nova insercao -->
+				<!-- outcome ==> para dever ir ao clicar -->
+				<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
+				<!-- Botao para SALVAR um novo produto -->
+				<p:commandButton value="Salvar" id="botaoSalvar"></p:commandButton>
+				
+			</p:toolbarGroup>
+			
+			<!-- Parte Direita da Barra -->
+			<p:toolbarGroup align="right">
+				<p:button value="Pesquisa"></p:button>
+			</p:toolbarGroup>
+		</p:toolbar>		
+		
+		<!-- A Grid -->
+		<p:panelGrid columns="2" id="painel" style="width : 100%; margin-top: 20px" columnClasses="rotulo,campo">
+			
+			<p:outputLabel value="Nome" for="nome"/>
+    		<p:inputText id="nome" size="100" maxlength="100"/>
+    		
+    		 <p:outputLabel value="Tipo" for="tipo"/>
+             <p:selectOneRadio id="tipo" required="false" >
+                 <f:selectItem itemLabel="Pessoa Física" itemValue="PF"/>
+                 <f:selectItem itemLabel="Pessoa Jurídica" itemValue="PJ"/>
+             </p:selectOneRadio>
+
+    		 <p:outputLabel value="CNPJ" for="cnpj"/>
+             <p:inputMask id="cnpj" value="" mask="99.999.999/9999-99" required="false"/>
+             
+             <h:outputLabel for="email" value="Email:" />
+             <p:inputText id="email1" value="" />
+		</p:panelGrid>
+		
+		<p:commandButton style="margin-top: 20px; height: 34px;" value="Adicionar Endereço" id="adicionarEnderecoCliente" 
+			onclick="PF('inclusaoEnderecoCliente').show(); return false;">
+			<p:resetInput target="inclusaoEnderecoClienteDialog" />
+		</p:commandButton>
+		
+		<p:dialog id="inclusaoEnderecoClienteDialog" header="Inclusão de Endereço do Cliente" widgetVar="inclusaoEnderecoCliente"  modal="true" resizable="false">
+			<h:panelGroup id="inclusaoPainel">
+				<p:messages>
+					<p:autoUpdate/>
+			    </p:messages>
+				<p:panelGrid columns="2" id="inclusaoEnderecoClientePanelGrid">
+					<p:outputLabel value="Logradouro" for="logradouro"/>
+					<p:inputText id="logradouro" required="true" size="60" 
+						requiredMessage="O Preenchimento do campo 'logradouro' é obrigatório!"/>
+
+					<p:outputLabel value="Complemento" for="complemento"/>
+					<p:inputText id="complemento" required="true"  size="40" 
+						requiredMessage="O Preenchimento do campo 'complemento' é obrigatório!"/>
+											
+					<p:outputLabel value="Número" for="numero"/>
+					<p:inputMask mask="9*" id="numero" required="true"  maxlength="6" size="6" 
+						requiredMessage="O Preenchimento do campo telefone é obrigatório!"/>
+
+					<p:outputLabel value="CEP" for="cep"/>
+					<p:inputMask mask="99.999-999" id="cep" required="true"  maxlength="10" size="10" 
+						requiredMessage="O Preenchimento do campo telefone é obrigatório!"/>
+											
+					<p:outputLabel value="Cidade" for="cidade"/>
+						<p:columnGroup>
+							<p:inputText id="cidade" required="true"  size="35" requiredMessage="O Preenchimento do campo 'cidade' é obrigatório!"/>			
+															
+							<p:outputLabel value="UF/Província" for="uf" style="padding-left: 25px;" />
+							<p:inputText id="uf" style="float: right; padding-right: 20px;" required="true"  size="2" requiredMessage="O Preenchimento do campo 'UF/Província' é obrigatório!"/>							
+						 <span style="clear: both"></span>
+						</p:columnGroup>			
+					<p:outputLabel/> 										
+					<p:commandButton value="Incluir" action="#{clienteBean.adicionar}" update="enderecoAdicionadoTable inclusaoEnderecoClientePanelGrid" process="inclusaoEnderecoClientePanelGrid"
+							oncomplete="tratarInclusaoCliente(args)" style="margin: 10px 0; text-align: center">	
+							<p:resetInput target="inclusaoEnderecoClienteDialog" />					
+					</p:commandButton>									
+					
+				</p:panelGrid>				
+			</h:panelGroup>			
+		</p:dialog>
+			
+		<p:dataTable id="enderecoAdicionadoTable" value="" var=""
+	    		style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
+	    		rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		<p:column headerText="Logradouro" style="text-align: left; width: 30%">
+	    			<h:outputText value="Rua das Pedras Grandes Azuis"/>	    			
+	    		</p:column>
+	    		<p:column headerText="Número"  style="text-align: left; width: 5%">
+	    			<h:outputText value="12345678"/>
+	    		</p:column>
+	    		<p:column headerText="Complemento"  style="text-align: left; width: 15%">
+	    			<h:outputText value="Ed Marrackech apt 505"/>
+	    		</p:column>
+	    	    <p:column headerText="CEP"  style="text-align: left; width: 5%">
+	    			<h:outputText value="77.888-999"/>
+	    		</p:column>
+	    		<p:column headerText="Cidade/UF"  style="text-align: left; width: 10%">
+	    			<h:outputText value="Sao Jose do trocentos Marcos/MT"/>
+	    		</p:column>
+	    		<p:column headerText="Ações"  style="text-align: center; width: 10%">  <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
+	    			<p:button icon="ui-icon-pencil" title="Editar"/> <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir"  oncomplete="PF('confirmacaoExclusaoEnderecoCliente').show()" />
+	    									  
+	    		</p:column> 
+	    	</p:dataTable>
+	    	
+	    	<p:confirmDialog header="Exclusão de Cliente" message="Tem certeza que deseja excluir o 'Cliente'?" widgetVar="confirmacaoExclusaoEnderecoCliente">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusaoEnderecoCliente').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusaoEnderecoCliente').hide();" />
+	    	</p:confirmDialog>
+
+	</ui:define>
+
+</ui:composition>
