@@ -4,15 +4,50 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "cliente")
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name = "nome_cliente", nullable = false, length = 150)
 	private String nome;
+	
+	@Column(name = "email_cliente", nullable = false, length = 200)
 	private String email;
+	
+	@Column(name = "sin_cliente", nullable = false, length = 120)
 	private String documentoReceitaFederal;
+	
+	@Enumerated(EnumType.STRING) //Ordinal (0,1,3...) String (texto do Enum)
+	@Column(name = "tipo_pessoa_cliente", nullable = false, length = 10)
 	private TipoPessoa tipo;
+	
+	/**
+	 *
+	 * @Transient ==> JPA ignora os objetos do tipo @Transient
+	 *  ** mappedBy = "cliente"  ==> conecta em Endereco no Atritbuto "cliente" na Entdidade Endereço
+	 *  ** cascade = CascadeType.ALL ==> toda vez que ouver alguma transacao usando a Entidade Cliente (incluir, deletar, modificar, etc) deve ser feito em cascade na Entidade 
+	 *  	"Endereco"
+	 */
+
+	@OneToMany(mappedBy = "cliente" ,cascade = CascadeType.ALL) 
 	private List<Endereco> enderecos = new ArrayList<>(); //Cliente tem 1+ Enderecos
 
 	public Long getId() {
