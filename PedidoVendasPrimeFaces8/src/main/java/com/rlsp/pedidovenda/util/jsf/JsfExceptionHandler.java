@@ -12,12 +12,16 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.rlsp.pedidovenda.service.NegocioException;
 
 
 
 public class JsfExceptionHandler extends ExceptionHandlerWrapper{
 
+	private static Log log = LogFactory.getLog(JsfExceptionHandler.class);
 	/**
 	 * Para o usar ExcpectionHanderdo JSF
 	 */
@@ -77,7 +81,7 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper{
 					handled = true;
 					FacesUtil.addErrorMessage(negocioException.getMessage());
 				} else {
-					System.out.println("No ViewExpiredException");
+					log.error("Erro de sistema : " + exception.getMessage(), exception); //Mensagem + Causa da Excecao (imprime a pilha do erro)
 					handled=true;
 					redirect("/Error.xhtml");
 				}

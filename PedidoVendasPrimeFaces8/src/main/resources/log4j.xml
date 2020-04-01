@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	
+	<!-- appender ==>  Destinos das mensagens de Log -->
+	
+	<!-- Destino => console (Classe do log4j) -->
+	<!-- valor do alvo (destino)==> vai para os 'System.out' -->
+	<!-- layout ==> formato da saída -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Destino => Arquivo (Classe do log4j) Rotacionado diariamente  ${catalina.home} ==> raiz do TomCat ${jboss.server.log.dir} ==> raiz do wildfly-->
+	<!-- valor do alvo (file)==> vai para o arquivo (${catalina.home}/logs/pedido-venda.log) -->
+	<!-- layout ==> formato da saída %d = data; %-5 = tipo do erro %c = classe do erro %m = mensagem %n = quebra de linha [enters] ==> PATTERN LAYOUT CLASS (Documentation)-->
+	<appender name="arquivo" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${jboss.server.log.dir}/logslog4j/pedido-venda.log" />
+		<param name="datePattern" value="'.'yyyy-MM-dd" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Nivel de Prioridade  (debug ==> INFO ==> ERROR ==> FATAL ==>)-->
+	<root>
+		<priority value="info" />
+		<appender-ref ref="arquivo" />
+		<appender-ref ref="console" />
+	</root>
+
+</log4j:configuration>
