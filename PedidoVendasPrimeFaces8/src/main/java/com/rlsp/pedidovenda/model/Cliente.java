@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -26,13 +28,16 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank @Size(max = 150)
 	@Column(name = "nome_cliente", nullable = false, length = 150)
 	private String nome;
 	
+	@NotBlank @Size(max = 200)
 	@Column(name = "email_cliente", nullable = false, length = 200)
 	private String email;
 	
-	@Column(name = "sin_cliente", nullable = false, length = 120)
+	@NotBlank @Size(max = 14)
+	@Column(name = "sin_cliente", nullable = false, length = 14)
 	private String documentoReceitaFederal;
 	
 	@Enumerated(EnumType.STRING) //Ordinal (0,1,3...) String (texto do Enum)

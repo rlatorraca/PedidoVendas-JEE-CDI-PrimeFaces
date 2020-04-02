@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="usuario")
@@ -25,6 +27,7 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank @Size(max = 150)
 	@Column(name = "nome_usuario", nullable = false, length = 150)
 	private String nome;
 	
@@ -32,9 +35,11 @@ public class Usuario implements Serializable {
 	 * "unique" = true
 	 *  - Isso representa um índice único para a coluna, que será criado automaticamente pelo Hibernate na tabela do banco de dados.
 	 */
+	@NotBlank @Size(max = 200)
 	@Column(name = "email_usuario", nullable = false, length = 200, unique = true)
 	private String email;
 	
+	@NotBlank @Size(max = 30)
 	@Column(name = "senha_usuario", nullable = false, length = 30)
 	private String senha;
 	/**

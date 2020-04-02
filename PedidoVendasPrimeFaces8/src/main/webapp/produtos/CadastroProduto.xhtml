@@ -13,6 +13,10 @@
 	 
 		<h1>Novo produto</h1>
 		
+		<p:messages closable="true">
+			<p:autoUpdate/>
+		</p:messages>
+		
 		<!-- Grupos de Barras de Ferramentas -->
 		<p:toolbar style="margin-top: 20px; margin-bottom: 20px; padding: 5px">
 			
@@ -36,26 +40,28 @@
 		<!-- A Grid -->
 		<p:panelGrid columns="2" id="painel" style="width : 100%; margin-top: 20px" columnClasses="rotulo,campo">
 			<p:outputLabel value="SKU" for="sku"/>
-			<p:inputText id="sku" size="20" maxlength="20"></p:inputText>
+			<p:inputText id="sku" size="20" maxlength="20" value="#{cadastroProdutoBean.produto.sku}"/>
 			
 			<p:outputLabel value="Nome" for="nome"/>
-    		<p:inputText id="nome" size="60" maxlength="80"/>
+    		<p:inputText id="nome" size="100" maxlength="110" value="#{cadastroProdutoBean.produto.nome}"/>
     		
-    		<p:outputLabel value="Categoria" for="categoria"/>
+    		<p:outputLabel value="Categoria" for="categoria" />
     		<p:selectOneMenu id="categoria">
     			<f:selectItem itemLabel="Selecione a categoria"/>
     		</p:selectOneMenu>
     		
     		<p:outputLabel value="Subcategoria" for="subCategoria"/>
-    		<p:selectOneMenu id="subCategoria">
+    		<p:selectOneMenu id="subCategoria" value="#{cadastroProdutoBean.produto.categoria}">
     			<f:selectItem itemLabel="Selecione a subcategoria"/>
     		</p:selectOneMenu>
     		
     		<p:outputLabel value="Valor unitário" for="valorUnitario"/>
-    		<p:inputText id="valorUnitario" size="14" maxlength="14" styleClass="moeda"/>
+    		<p:inputText id="valorUnitario" size="14" maxlength="14" styleClass="moeda" value="#{cadastroProdutoBean.produto.valorUnitario}">
+    			<f:convertNumber maxFractionDigits="2" minFractionDigits="2"  />
+    		</p:inputText>
     		
     		<p:outputLabel value="Estoque" for="estoque"/>
-    		<p:inputText id="estoque" size="10" maxlength="4"/>
+    		<p:inputText id="estoque" size="10" maxlength="5" value="#{cadastroProdutoBean.produto.quantidadeEstoque}"/>
 		</p:panelGrid>
 		</h:form>
 	</ui:define>

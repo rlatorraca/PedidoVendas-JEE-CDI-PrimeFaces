@@ -4,22 +4,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import com.rlsp.pedidovenda.model.EnderecoEntrega;
+import com.rlsp.pedidovenda.model.Pedido;
 import com.rlsp.pedidovenda.service.NegocioException;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class CadastroPedidoBean implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+
+	private Pedido pedido;
+	
 	private List<Integer> itens;
 	
 	public CadastroPedidoBean() {
+		pedido = new Pedido();
+		pedido.setEnderecoEntrega(new EnderecoEntrega());
 		itens = new ArrayList<>();
 		itens.add(1);
 	}
@@ -29,7 +33,13 @@ public class CadastroPedidoBean implements Serializable {
 	}
 	
 	public void salvar() {
-		throw new NegocioException("Pedido ainda nao foi implementado");
+		//throw new NegocioException("Pedido ainda nao foi implementado");
 	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+	
+	
 	
 }

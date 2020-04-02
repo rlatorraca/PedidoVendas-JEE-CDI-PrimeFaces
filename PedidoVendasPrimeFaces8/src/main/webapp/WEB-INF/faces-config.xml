@@ -5,6 +5,14 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
     version="2.3">
     
+   <application>
+		<message-bundle>com.rlsp.pedidovenda.Messages</message-bundle>
+	
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+		</locale-config>
+	</application>
+    
    <factory>
 		<exception-handler-factory>
 			com.rlsp.pedidovenda.util.jsf.JsfExceptionHandlerFactory

@@ -11,6 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.rlsp.pedidovenda.validation.SKU;
 
 @Entity
 @Table(name = "produto")
@@ -22,18 +29,24 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
+	@Size(max=110)
 	@Column(name = "nome_produto", nullable = false, length = 120)
 	private String nome;
 	
-	@Column(name = "sku_produto", nullable = false, unique = true)
+	@NotBlank  @SKU
+	@Column(name = "sku_produto", length = 21, nullable = false, unique = true)
 	private String sku;
 	
+	@NotNull(message = "é obrigatório")
 	@Column(name = "valor_unitario_produto", nullable = false, precision=12, scale=2)	
 	private BigDecimal valorUnitario;
 	
+	@NotNull @Min(value=0, message="Apenas valores positivos") @Max(value=9999, message= "Não pode ser maior que 9.999 unidades")
 	@Column(name = "quantidade_estoque_produto", nullable = false)
 	private Integer quantidadeEstoque;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "categoria_id", nullable = false)
 	private Categoria categoria;
