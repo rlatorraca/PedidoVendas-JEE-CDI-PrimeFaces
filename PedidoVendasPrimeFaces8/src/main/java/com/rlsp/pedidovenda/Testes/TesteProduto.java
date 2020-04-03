@@ -26,8 +26,8 @@ public class TesteProduto {
 		
 		// instanciamos a categoria filha (Refrigerantes)
 		Categoria categoriaFilha = new Categoria();
-		categoriaFilha.setDescricao("Refrigerante");
-		categoriaFilha.setCategoriaPai(categoriaPai);
+		categoriaFilha.setDescricao("Apples");
+		//categoriaFilha.setCategoriaPai(categoriaPai);
 		
 		// adicionamos a categoria Refrigerantes como filha de Bebidas
 		categoriaPai.getSubcategorias().add(categoriaFilha);
@@ -39,10 +39,10 @@ public class TesteProduto {
 		// instanciamos e persistimos um produto
 		Produto produto = new Produto();
 		produto.setCategoria(categoriaFilha);
-		produto.setNome("Coca Cola 2L");
+		produto.setNome("Iphone 9");
 		produto.setQuantidadeEstoque(10);
-		produto.setSku("COC00123");
-		produto.setValorUnitario(new BigDecimal(2.21));
+		produto.setSku("APP00123");
+		produto.setValorUnitario(new BigDecimal(1232.21));
 		
 		manager.persist(produto);
 		

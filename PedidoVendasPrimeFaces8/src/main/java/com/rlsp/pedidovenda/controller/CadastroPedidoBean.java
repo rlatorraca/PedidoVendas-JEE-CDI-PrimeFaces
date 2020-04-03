@@ -9,7 +9,6 @@ import javax.inject.Named;
 
 import com.rlsp.pedidovenda.model.EnderecoEntrega;
 import com.rlsp.pedidovenda.model.Pedido;
-import com.rlsp.pedidovenda.service.NegocioException;
 
 @Named
 @ViewScoped

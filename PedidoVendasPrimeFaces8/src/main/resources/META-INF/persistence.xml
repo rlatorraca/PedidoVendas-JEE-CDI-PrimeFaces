@@ -6,7 +6,9 @@
 	<!-- Unidade de Persistencia (nome unico, qualquer) -->
 	<persistence-unit name="PedidoVendaPU">
 		<!-- Classe que fornece o EntityManager para Unidade de Persistencia (as conexoes com DB) -->
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider>  -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>com.rlsp.pedidovenda.model.Categoria</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/PedidoVendasPrimeFacesJEE8?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC"  />
@@ -14,8 +16,11 @@
 			<property name="javax.persistence.jdbc.password" value="123" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 			
+			<!-- <property name="javax.persistence.schema-generation.database.action" value="none"/> --> 
 			<property name="javax.persistence.schema-generation.database.action" value="none"/> 
-			<!--<property name="hibernate.hbm2ddl.auto" value="create"/> -->
+		    <property name="javax.persistence.schema-generation.drop-source" value="metadata-then-script"/>
+		    <property name="javax.persistence.schema-generation.create-source" value="metadata-then-script"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>		
 			<property name="hibernate.show_sql" value="true" />			
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
 		</properties>
