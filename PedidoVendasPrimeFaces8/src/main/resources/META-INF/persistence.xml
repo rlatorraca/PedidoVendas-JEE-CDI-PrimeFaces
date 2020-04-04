@@ -9,6 +9,15 @@
 		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider>  -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>com.rlsp.pedidovenda.model.Categoria</class>
+		<class>com.rlsp.pedidovenda.model.Cliente</class>
+		<class>com.rlsp.pedidovenda.model.Endereco</class>
+		<class>com.rlsp.pedidovenda.model.Enderecontrega</class>
+		<class>com.rlsp.pedidovenda.model.Grupo</class>
+		<class>com.rlsp.pedidovenda.model.ItemPedido</class>
+		<class>com.rlsp.pedidovenda.model.Pedido</class>
+		<class>com.rlsp.pedidovenda.model.Produto</class>
+		<class>com.rlsp.pedidovenda.model.Usuario</class>
+		
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/PedidoVendasPrimeFacesJEE8?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC"  />

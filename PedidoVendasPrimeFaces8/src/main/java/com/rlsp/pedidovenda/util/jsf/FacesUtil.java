@@ -14,4 +14,14 @@ public class FacesUtil {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
 	}
 	
+	/**
+	 * PostBack ==> acao que é feito pelo 2 ou mais vezes
+	 */
+	public static boolean isPostBack() {
+		return FacesContext.getCurrentInstance().isPostback();
+	}
+	
+	public static boolean isNotPostBack() {
+		return !isPostBack(); // Retorna TRUE se for o PRIMEIRO ACESSO (pois seria postbacl)
+	}
 }
