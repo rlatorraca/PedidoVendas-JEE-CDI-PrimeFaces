@@ -32,7 +32,7 @@
 				<!-- outcome ==> para dever ir ao clicar -->
 				<p:button value="Novo" outcome="/produtos/CadastroProduto"/>
 				<!-- Botao para SALVAR um novo produto -->
-				<p:commandButton value="Salvar" id="botaoSalvar" ajax="true" action="#{cadastroProdutoBean.salvar}"></p:commandButton>
+				<p:commandButton value="Salvar" id="botaoSalvar" ajax="true" action="#{cadastroProdutoBean.salvar}" update="@form"></p:commandButton>
 				
 			</p:toolbarGroup>
 			

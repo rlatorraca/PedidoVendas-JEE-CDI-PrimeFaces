@@ -10,7 +10,7 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
 import com.rlsp.pedidovenda.model.Categoria;
-import com.rlsp.pedidovenda.repository.CategoriaRepository;
+import com.rlsp.pedidovenda.repository.CategoriasRepository;
 import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
 
 /**
@@ -26,13 +26,13 @@ public class CategoriaConverter implements Converter<Object> {
 	 *  - @Inject ==> NAO FUNCIONA DENTRO DO CONVERTER/CONVERSOR
 	 */
 	//@Inject
-	private CategoriaRepository categoriaRepository;
+	private CategoriasRepository categoriasRepository;
 	
 	public CategoriaConverter() {
 		/**
 		 * Como a @Inject nao funciona temos que chamar o metodos getBean() na Classe CDIServiceLocator passando uma CLASSE para RETORNAR um INSTANCIA DA CLASSE no contexto da CDI
 		 */
-		categoriaRepository = CDIServiceLocator.getBean(CategoriaRepository.class); 
+		categoriasRepository = CDIServiceLocator.getBean(CategoriasRepository.class); 
 		
 	}
 	
@@ -44,7 +44,7 @@ public class CategoriaConverter implements Converter<Object> {
 		
 		if(value != null) {
 			Long id = Long.parseLong(value);
-			retorno = categoriaRepository.porId(id);
+			retorno = categoriasRepository.porId(id);
 			return retorno;
 			
 		}
