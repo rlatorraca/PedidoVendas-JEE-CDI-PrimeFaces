@@ -3,11 +3,16 @@ package com.rlsp.pedidovenda.controller;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped; //Bean CDI 9 (javax.faces.bean = JSF)
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import com.rlsp.pedidovenda.filter.ProdutoFilter;
+import com.rlsp.pedidovenda.model.Produto;
+import com.rlsp.pedidovenda.repository.ProdutosRepository;
+import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 
 @Named
 //@ManagedBean
@@ -17,17 +22,56 @@ public class PesquisaProdutosBean implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	private List<Integer> produtosFiltrados;
 	
-	public PesquisaProdutosBean() {
-		produtosFiltrados = new ArrayList<>();
-		for (int i = 0; i < 50; i++) {
-			produtosFiltrados.add(i);
-		}
+	private ProdutoFilter filtro;
+	
+	private List<Produto> produtosFiltrados;
+	
+	private Produto produtoSelecionado;
+	
+	@Inject
+	private ProdutosRepository produtoRepository;
+	
+	public void pesquisaProduto() {
+		
+		produtosFiltrados = produtoRepository.produtosFiltrados(filtro);
+	}
+	
+	public void excluir() {
+		produtoRepository.remover(produtoSelecionado); //Chamda o Repository para excluir o Produto Selecionado
+		
+		produtosFiltrados.remove(produtoSelecionado); //Exclui da tela o objeto exlcuido
+		
+		FacesUtil.addInfoMessage("Produto " + produtoSelecionado.getSku() 
+				+ " excluído com sucesso.");
 	}
 
-	public List<Integer> getProdutosFiltrados() {
+	public PesquisaProdutosBean() {
+		super();
+		filtro = new ProdutoFilter();
+	}
+
+	public List<Produto> getProdutosFiltrados() {
 		return produtosFiltrados;
 	}
+
+	public ProdutoFilter getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(ProdutoFilter filtro) {
+		this.filtro = filtro;
+	}
+
+	public Produto getProdutoSelecionado() {
+		return produtoSelecionado;
+	}
+
+	public void setProdutoSelecionado(Produto produtoSelecionado) {
+		this.produtoSelecionado = produtoSelecionado;
+	}
+	
+	
+	
 	
 }

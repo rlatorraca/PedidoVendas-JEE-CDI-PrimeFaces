@@ -22,6 +22,14 @@
 		    <version>2.4.0</version>
 		</dependency>
 		
+		<!-- OmniFaces is a utility library for JSF 2 that focusses on utilities that ease everyday tasks with the standard JSF API. -->
+		<!-- OmniFaces - Apr 04, 2020 -->
+	    <dependency>
+    		<groupId>org.omnifaces</groupId>
+    		<artifactId>omnifaces</artifactId>
+    		<version>3.4.1</version>
+	    </dependency>
+		
 		<!-- Prime Faces (Components Libraries) -->
 		<dependency>
 		    <groupId>org.primefaces</groupId>
@@ -91,6 +99,14 @@
 		    <version>6.1.2.Final</version>
 		    <scope>compile</scope>
 		</dependency>
+		
+		<!-- Commons-lang3 -= Classes Utilitarias em JAVA, Apr 04, 2020 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.10</version>
+		</dependency>
+		
 		
   	
   </dependencies>

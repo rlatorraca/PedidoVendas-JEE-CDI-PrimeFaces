@@ -57,6 +57,11 @@ public class CadastroProdutoBean implements Serializable {
 		if(FacesUtil.isNotPostBack()) {
 			// Se nao for PostBack (nao for a primeira vez)
 			categorias = categoriasRepository.buscarCategorias(); // Pega dentro de CategoriaRespository
+			
+			// Carrega as subcategorias quando estiver usando o EDITAR
+			if (this.categoriaPai != null) {
+				carregarSubcategorias();
+			}
 		}
 				
 		System.out.println("Finalizada a Inicializacao de .... Categorias");
@@ -73,6 +78,11 @@ public class CadastroProdutoBean implements Serializable {
 		limpar();
 		
 		FacesUtil.addInfoMessage("Produto salvo com sucesso!");
+	}
+	
+	public boolean isEditando() {
+		// Returna TRUE se tiver o ID and TRUE se for Novo Produto
+		return this.produto.getId() != null;
 	}
 	public void carregarSubcategorias() {
 		
@@ -106,5 +116,15 @@ public class CadastroProdutoBean implements Serializable {
 	public Produto getProduto() {
 		return produto;
 	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+		
+		if (this.produto != null) {
+			this.categoriaPai = this.produto.getCategoria().getCategoriaPai();
+		}
+	}
+	
+	
 
 }

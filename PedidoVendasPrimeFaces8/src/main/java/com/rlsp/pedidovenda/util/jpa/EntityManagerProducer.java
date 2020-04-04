@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.hibernate.Session;
+
 @ApplicationScoped
 public class EntityManagerProducer {
 
@@ -26,8 +28,8 @@ public class EntityManagerProducer {
 	 * 
 	 */
 	@Produces @RequestScoped
-	public EntityManager createEntityManager() {
-		return gerenciador.createEntityManager();
+	public Session createEntityManager() {
+		return (Session) gerenciador.createEntityManager();
 	}
 	
 	/**

@@ -3,20 +3,23 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui">
 	
 	<!-- titulo pagina -->
-	<ui:define name="titulo">Novo Produto</ui:define>
+	<ui:define name="titulo">#{cadastroProdutoBean.editando == true ? "Editar Produto" : "Novo Produto"}</ui:define>
 	
 	<ui:define name="corpo">
 	
 	 <f:metadata>
+	 	<!-- <o:viewParam name="produto" value="#{cadastroProdutoBean.produto}"/>  -->
+	 	<f:viewParam name="produto" value="#{cadastroProdutoBean.produto}"/>
     	<f:event listener="#{cadastroProdutoBean.inicializar}" type="preRenderView" />
      </f:metadata>
 	
 	 <h:form>
 	 
-		<h1>Novo produto</h1>
+		<h1>#{cadastroProdutoBean.editando ? "Editar Produto" : "Novo Produto"}</h1>
 		
 		<p:messages closable="true">
 			<p:autoUpdate/>
