@@ -16,8 +16,6 @@ import com.rlsp.pedidovenda.repository.CategoriasRepository;
 import com.rlsp.pedidovenda.service.CadastroProdutoService;
 import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 
-
-
 @Named
 @ManagedBean
 @ViewScoped
@@ -27,7 +25,7 @@ public class CadastroProdutoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * Faz buscas no DBpara prencher a tela e/ou geral
+	 * Faz buscas no DB para prencher a tela e/ou geral
 	 */
 	@Inject
 	private CategoriasRepository categoriasRepository;
@@ -41,6 +39,9 @@ public class CadastroProdutoBean implements Serializable {
 	@NotNull
 	private Categoria categoriaPai;
 	
+	/**
+	 * Atributo para trabalhar o Objeto do BEAN
+	 */
 	private Produto produto;
 	
 	private List<Categoria> categorias; 
@@ -52,7 +53,7 @@ public class CadastroProdutoBean implements Serializable {
 	
 	public void inicializar() {
 		
-		System.out.println("Inicializando .... Categorias");
+		System.out.println("Inicializando .... Categorias em CadastroProdutoBean");
 
 		if(FacesUtil.isNotPostBack()) {
 			// Se nao for PostBack (nao for a primeira vez)

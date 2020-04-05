@@ -100,6 +100,14 @@
 		    <scope>compile</scope>
 		</dependency>
 		
+		<!-- Expression Language 3.0,  Dec 14, 2018-->
+		<dependency>
+    		<groupId>org.glassfish</groupId>
+    		<artifactId>javax.el</artifactId>
+    		<version>3.0.1-b11</version>
+		</dependency>
+		
+				
 		<!-- Commons-lang3 -= Classes Utilitarias em JAVA, Apr 04, 2020 -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
