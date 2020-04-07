@@ -1,6 +1,8 @@
 package com.rlsp.pedidovenda.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -36,21 +38,35 @@ public class CadastroUsuarioBean implements Serializable{
 	@Inject
 	private CadastroUsuarioService cadastroUsuarioService;
 
-	public CadastroUsuarioBean(){
-		limpar();
-	}
 	
 	/**
 	 * Atributo para trabalhar o Objeto do BEAN
 	 */
 	private Usuario usuario;
 	
-	private List<Grupo> grupos; 
+	private boolean editandoGrupo;
+	
+	
+	private Grupo grupoEscolhido;
+	private Grupo grupo;
+	
+	private List<Grupo> grupos;
+	private List<Grupo> gruposFiltrados;
 
 	private void limpar() {
+		
 		usuario = new Usuario();
+		grupoEscolhido = new Grupo();		
+		gruposFiltrados = new ArrayList<>();		
+		editandoGrupo = false;
 		
 	}
+	
+	public CadastroUsuarioBean(){
+		limpar();
+		
+	}
+	
 	
 	public void salvar() {
 		this.usuario = cadastroUsuarioService.salvar(this.usuario);
@@ -61,16 +77,52 @@ public class CadastroUsuarioBean implements Serializable{
 	
 	public void inicializar() {
 		
-		System.out.println("Inicializando .... GRUPO em CadastroUsuarioBean");
 
-		if(FacesUtil.isNotPostBack()) {
+		//if(FacesUtil.isNotPostBack()) {
 			// Se nao for PostBack (nao for a primeira vez)
-			grupos = gruposRepository.buscarGrupos();// Pega dentro de CategoriaRespository
+			grupos = gruposRepository.buscarGrupos();// Pega dentro de CategoriaRespository	
+
 			
+		//}
+
+	}
+	
+	public void carregarGruposIncluidosTabela(){
+		
+		if( grupoEscolhido != null) {
+			gruposFiltrados.add(this.grupoEscolhido);
 			
+		} else {
+			System.out.println("gruposFiltrados is NULL");
 		}
-				
-		System.out.println("Inicializando .... GRUPO em CadastroUsuarioBean");
+		
+	
+	
+		
+		
+	}
+	
+	public void imprimir() {
+		System.out.println(grupoEscolhido.getNome());
+	}
+	
+	public void salvarGrupo() {
+		
+		if(editandoGrupo) {
+			grupos.set(grupos.indexOf(grupo),grupo);
+			grupo = new Grupo();
+		} else {
+			grupos.add(grupo);
+			grupo = new Grupo();
+		}
+	}
+
+	public void excluirGrupo() {
+		gruposFiltrados.remove(grupoEscolhido);
+	}
+	
+	public void editarGrupo() {
+		editandoGrupo = true;
 	}
 
 	public UsuariosRepository getUsuarioRepository() {
@@ -112,6 +164,37 @@ public class CadastroUsuarioBean implements Serializable{
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
 	}
+
+	public Grupo getGrupoEscolhido() {
+		return grupoEscolhido;
+	}
+
+	public void setGrupoEscolhido(Grupo grupoEscolhido) {
+		this.grupoEscolhido = grupoEscolhido;
+	}
+
+	public List<Grupo> getGruposFiltrados() {
+		return gruposFiltrados;
+	}
+
+	public void setGruposFiltrados(List<Grupo> gruposFiltrados) {
+		this.gruposFiltrados = gruposFiltrados;
+	}
 	
+	public boolean isEditando() {
+		return this.usuario.getId() != null;
+	}
+	
+	public boolean isEditandoiGrupo() {
+		return editandoGrupo;
+	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
 	
 }

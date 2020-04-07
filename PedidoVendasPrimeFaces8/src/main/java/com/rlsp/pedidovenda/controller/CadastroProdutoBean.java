@@ -39,6 +39,7 @@ public class CadastroProdutoBean implements Serializable {
 	@NotNull
 	private Categoria categoriaPai;
 	
+	
 	/**
 	 * Atributo para trabalhar o Objeto do BEAN
 	 */

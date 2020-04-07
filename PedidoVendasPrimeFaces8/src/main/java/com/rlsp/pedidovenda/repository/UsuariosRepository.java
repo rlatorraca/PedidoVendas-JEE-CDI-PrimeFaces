@@ -27,9 +27,22 @@ public class UsuariosRepository	implements Serializable{
 			}
 		}
 
+		public Usuario porId(Long id) {
+			
+			return gerenciador.find(Usuario.class, id);
+		}
+		
 		public Usuario salvarAlterar(Usuario usuario) {
 			
 			return usuario = gerenciador.merge(usuario); //Inserir ou Alterar;;
 		}
-
+		
+//		public List<Categoria> incluirGruposUsuario(Grupo grupoEscolhido){
+//			String jpql = "from usuario_grupo where categoriaPai = :raiz";
+//			return gerenciador.createQuery(jpql, Categoria.class)
+//					.setParameter("raiz", categoriaPai)
+//					.getResultList();
+//			
+//			return usuarioGrupo = gerenciador.merge(usuario); //Inserir ou Alterar;;
+//		}
 }
