@@ -74,7 +74,7 @@
 	    		</p:selectOneMenu>
 	    		
 	       		<p:commandButton value="Adicionar Grupo" style="margin-top: 20px" action="#{cadastroUsuarioBean.carregarGruposIncluidosTabela}" process="itempanel" update="selecaogrupo gruposUsuariosTable">
-	       			<p:ajax listener="#{cadastroUsuarioBean.inicializar}" update="grupousuario"/>
+	       			<p:ajax listener="#{cadastroUsuarioBean.inicializar}" update="selecaogrupo"/>
 	       		</p:commandButton>
 			</h:panelGrid>
 
