@@ -73,7 +73,7 @@
  					<p:ajax listener="#{cadastroUsuarioBean.imprimir}" ></p:ajax>	
 	    		</p:selectOneMenu>
 	    		
-	       		<p:commandButton value="Adicionar Grupo" style="margin-top: 20px" action="#{cadastroUsuarioBean.carregarGruposIncluidosTabela}" process="itempanel" update="selecaogrupo gruposUsuariosTable)">
+	       		<p:commandButton value="Adicionar Grupo" style="margin-top: 20px" action="#{cadastroUsuarioBean.carregarGruposIncluidosTabela}" process="itempanel" update="selecaogrupo gruposUsuariosTable">
 	       			<p:ajax listener="#{cadastroUsuarioBean.inicializar}" update="grupousuario"/>
 	       		</p:commandButton>
 			</h:panelGrid>
