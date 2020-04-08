@@ -69,10 +69,13 @@ public class CadastroUsuarioBean implements Serializable{
 	
 	
 	public void salvar() {
+		
+		usuario.setGrupos(gruposFiltrados);		
+		FacesUtil.addInfoMessage("Usuário salvo com sucesso!");
 		this.usuario = cadastroUsuarioService.salvar(this.usuario);
 		limpar();
 		
-		FacesUtil.addInfoMessage("Produto salvo com sucesso!");
+		FacesUtil.addInfoMessage("Usuario salvo com sucesso!");
 	}
 	
 	public void inicializar() {
@@ -81,6 +84,9 @@ public class CadastroUsuarioBean implements Serializable{
 		//if(FacesUtil.isNotPostBack()) {
 			// Se nao for PostBack (nao for a primeira vez)
 			grupos = gruposRepository.buscarGrupos();// Pega dentro de CategoriaRespository	
+			if (usuario.getId() != null ) {
+				editarGrupo();
+			}
 
 			
 		//}
@@ -94,12 +100,7 @@ public class CadastroUsuarioBean implements Serializable{
 			
 		} else {
 			System.out.println("gruposFiltrados is NULL");
-		}
-		
-	
-	
-		
-		
+		}		
 	}
 	
 	public void imprimir() {
@@ -109,10 +110,10 @@ public class CadastroUsuarioBean implements Serializable{
 	public void salvarGrupo() {
 		
 		if(editandoGrupo) {
-			grupos.set(grupos.indexOf(grupo),grupo);
+			gruposFiltrados.set(gruposFiltrados.indexOf(grupo),grupo);
 			grupo = new Grupo();
 		} else {
-			grupos.add(grupo);
+			gruposFiltrados.add(grupo);
 			grupo = new Grupo();
 		}
 	}
@@ -122,7 +123,8 @@ public class CadastroUsuarioBean implements Serializable{
 	}
 	
 	public void editarGrupo() {
-		editandoGrupo = true;
+		editandoGrupo = true;		
+		gruposFiltrados = usuario.getGrupos();
 	}
 
 	public UsuariosRepository getUsuarioRepository() {
@@ -185,7 +187,7 @@ public class CadastroUsuarioBean implements Serializable{
 		return this.usuario.getId() != null;
 	}
 	
-	public boolean isEditandoiGrupo() {
+	public boolean isEditandoGrupo() {
 		return editandoGrupo;
 	}
 

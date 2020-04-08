@@ -8,14 +8,18 @@
     <ui:define name="titulo">Pesquisa de Usuários</ui:define>
     
     <ui:define name="corpo">
-    	<h:form>
-	    	<h1>Pesquisa de Usuários</h1>
+    	<h:form id="frmPesquisaUsuario">
+	    	<h1>Pesquisar Usuário</h1>
+	    	
+	        <p:messages closable="true">
+				<p:autoUpdate/>
+			</p:messages>
 	    	
 	    	<!-- ToolBar -->
 	    	<p:toolbar style="margin-top: 20px; margin-bottom: 20px; padding: 5px">
 	    	
 	    		<p:toolbarGroup>
-	    			<p:commandButton value="Pesquisar" />
+	    			<p:commandButton value="Pesquisar" action="#{pesquisaUsuariosBean.pesquisarFiltrados}" update="@form"/>
 	    		</p:toolbarGroup>
 	    	
 	    		<p:toolbarGroup align="right">
@@ -26,30 +30,49 @@
 	    	<!-- Panel Grid -->
 	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 	    	
-	    	 	<p:outputLabel value="Nome" />
-	    		<p:inputText size="100" />
+	    	 	<p:outputLabel value="Nome" for="nome" />
+	    	 	<p:inputText id="nome" size="100" value="#{pesquisaUsuariosBean.filtro.nome}" />
+	    		
+	    		<p:outputLabel value="E-mail" for="email"/>
+	    		<p:inputText id="email" size="100" value="#{pesquisaUsuariosBean.filtro.email}" />
 	    	
 	    	</p:panelGrid>
 	    	
-	    	<p:dataTable id="pedidosTable" value="" var=""
+	    	<p:dataTable id="usuariosTable" value="#{pesquisaUsuariosBean.usuariosFiltrados}" var="usuario"
 	    		style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
 	    		rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 	    		
 	    		<p:column headerText="Nome" style="text-align: left; width: 70%">
-	    			<h:outputText value="Supermercado Joao das Counves"/>
-	    			<h:outputText value="Supermercado Joao das Counves"/>		    			
+	    			<h:outputText value="#{usuario.nome}"/>
+	    					    			
 	    		</p:column>
 	    		<p:column headerText="E-mail"  style="text-align: left; width: 25%">
-	    			<h:outputText value="Pessoa Jurídica"/>
+	    			<h:outputText value="#{usuario.email}"/>
 	    		</p:column>
 	    		
+	    		<h:inputHidden value="#{usuario.grupo}" id="name"/>
+	    		
+	    		
 	    		<p:column headerText="Ações" style="text-align: center; width: 10%">  
-	    			<p:button icon="ui-icon-pencil" title="Editar"/>  <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
-	    			<p:commandButton icon="ui-icon-trash" title="Excluir"  /> <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->	    									  
+	    			<p:button icon="ui-icon-pencil" title="Editar" outcome="/usuarios/CadastroUsuario">		 <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
+	    				<f:param name="usuario" value="#{usuario.id}" ></f:param>	    				
+	    				
+	    			</p:button>
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusaoUsuario').show()"  process="@this" update=":frmPesquisaUsuario:confirmacaoExclusaoUsuarioDialog"> 
+	    				<f:setPropertyActionListener value="#{usuario}" target="#{pesquisaProdutosBean.produtoSelecionado}"></f:setPropertyActionListener>
+	    			</p:commandButton>
+	    			<!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->	    									  
 	    		</p:column>
 	    		
 	    		 
 	    	</p:dataTable>
+	    	
+	    	<p:confirmDialog id="confirmacaoExclusaoUsuarioDialog" header="Exclusão de usuário" widgetVar="confirmacaoExclusaoUsuario"
+	    	     message="Tem certeza que deseja excluir o usuario #{pesquisaUsuarioBean.usuarioSelecionado.nome} (#{pesquisaUsuarioBean.usuarioSelecionado.email})?" >
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusaoUsuario').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusaoUsuario').hide();" action="#{pesquisaProdutosBean.excluir}" process="@this"
+	    		 	update=":frmPesquisaUsuario:usuariosTable"/>
+	    	</p:confirmDialog>
 	    	
     	</h:form>
     </ui:define>

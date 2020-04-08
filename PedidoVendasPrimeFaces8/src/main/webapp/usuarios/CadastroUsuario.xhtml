@@ -6,10 +6,10 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	
 	<!-- titulo pagina -->
-	<ui:define name="titulo">Novo Usuário</ui:define>
+	<ui:define name="titulo">#{cadastroUsuarioBean.editando ? 'Editando Usuário' : 'Novo Usuário'}</ui:define>
 	
 	<ui:define name="corpo">
-	<h:form id="frm">
+	<h:form id="frm"  onkeypress="if (event.keyCode == 13) {event.preventDefault()}">
 		<f:metadata>
 		 	<!-- <o:viewParam name="produto" value="#{cadastroProdutoBean.produto}"/>  -->
 		 	<f:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}"/>
@@ -18,7 +18,7 @@
 	
 	 
 	 
-			<h1>Novo Usuário</h1>
+			<h1>#{cadastroUsuarioBean.editando ? 'Editando Usuário' : 'Novo Usuário'}</h1>
 			
 			<p:messages closable="true">
 				<p:autoUpdate/>
@@ -40,7 +40,7 @@
 				
 				<!-- Parte Direita da Barra -->
 				<p:toolbarGroup align="right">
-					<p:button value="Pesquisa"></p:button>
+					<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuario" ></p:button>
 				</p:toolbarGroup>
 			</p:toolbar>		
 			
@@ -48,7 +48,7 @@
 			<p:panelGrid columns="2" id="painel" style="width : 100%; margin-top: 20px" columnClasses="rotulo,campo">
 				
 				<p:outputLabel value="Nome" for="nome"/>
-	    		<p:inputText id="nome" size="100" maxlength="100"/>
+	    		<p:inputText id="nome" size="100" maxlength="100" value="#{cadastroUsuarioBean.usuario.nome}"/>
 	    		
 	
 	    		<h:outputLabel for="email" value="Email :" />
@@ -73,10 +73,9 @@
  					<p:ajax listener="#{cadastroUsuarioBean.imprimir}" ></p:ajax>	
 	    		</p:selectOneMenu>
 	    		
-	       		<p:commandButton value="Adicionar Grupo" style="margin-top: 20px" action="#{cadastroUsuarioBean.carregarGruposIncluidosTabela}" process="itempanel" update="selecaogrupo gruposUsuariosTable">
-	       			<p:ajax listener="#{cadastroUsuarioBean.inicializar}" update="selecaogrupo"/>
-	       		</p:commandButton>
-			</h:panelGrid>
+	       		<p:commandButton value="Adicionar Grupo" style="margin-top: 20px" action="#{cadastroUsuarioBean.carregarGruposIncluidosTabela}" process="itempanel" update="selecaogrupo gruposUsuariosTable"/>
+	       			
+	       	</h:panelGrid>
 
 				
 			
