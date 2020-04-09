@@ -1,5 +1,6 @@
 package com.rlsp.pedidovenda.model;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -63,15 +64,15 @@ public class Pedido implements Serializable {
 	
 	@NotNull
 	@Column(name = "valor_frete_pedido", nullable = false, precision = 10, scale = 2)
-	private BigDecimal valorFrete;
+	private BigDecimal valorFrete = BigDecimal.ZERO;
 	
 	@NotNull
 	@Column(name = "valor_desconto_pedido", nullable = false, precision = 10, scale = 2)
-	private BigDecimal valorDesconto;
+	private BigDecimal valorDesconto = BigDecimal.ZERO;
 	
 	@NotNull
 	@Column(name = "valor_total_pedido", nullable = false, precision = 15, scale = 2)
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotal = BigDecimal.ZERO;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -105,6 +106,20 @@ public class Pedido implements Serializable {
 	 */
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)	
 	private List<ItemPedido> itens = new ArrayList<>();
+	
+	/**
+	 *Metdoos Transientes (nao persistidos no DB) 
+	 * @return
+	 */
+	@Transient
+	public boolean isNovo() {
+		return getId() == null;
+	}
+	
+	@Transient
+	public boolean isExistente() {
+		return !isNovo();
+	}
 
 	public Long getId() {
 		return id;

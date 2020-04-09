@@ -8,5 +8,9 @@
        <interceptors>
 			<class>com.rlsp.pedidovenda.util.jpa.TransactionInterceptor</class>
 	   </interceptors>
+	   
+
+
+
 </beans>
 

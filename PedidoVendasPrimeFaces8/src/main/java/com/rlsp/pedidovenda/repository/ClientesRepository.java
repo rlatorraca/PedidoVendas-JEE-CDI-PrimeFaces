@@ -41,6 +41,13 @@ public class ClientesRepository implements Serializable{
 		}
 		
 	}
+	
+	public List<Cliente> porNome(String nome) {
+		return this.gerenciador.createQuery("from Cliente " +
+				"where upper(nome) like :nome", Cliente.class)
+				.setParameter("nome", nome.toUpperCase() + "%")
+				.getResultList();
+	}
 
 	@Transactional
 	public Cliente salvarAlterar(Cliente cliente) {

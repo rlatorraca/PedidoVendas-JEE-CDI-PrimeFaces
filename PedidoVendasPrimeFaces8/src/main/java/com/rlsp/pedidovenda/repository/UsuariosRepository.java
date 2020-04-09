@@ -45,6 +45,12 @@ public class UsuariosRepository	implements Serializable{
 			return gerenciador.find(Usuario.class, id);
 		}
 		
+		public List<Usuario> vendedores() {
+			// TODO Filtrar apenas vendedores (por um grupo específico)
+			return this.gerenciador.createQuery("from Usuario", Usuario.class)
+					.getResultList();
+		}
+		
 		@Transactional
 		public Usuario salvarAlterar(Usuario usuario) {
 			
