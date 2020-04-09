@@ -15,11 +15,22 @@
 	</script>
 	
 	<!-- titulo pagina -->
-	<ui:define name="titulo">Novo Cliente</ui:define>
+	<ui:define name="titulo">#{cadastroClienteBean.editando ? 'Editando cliente' : 'Novo cliente'}</ui:define>
 	
 	<ui:define name="corpo">
 	
-		<h1>Novo Cliente</h1>
+	 <h:form id="frmCadastroUsuario">
+		 <f:metadata>
+		 	<!-- <o:viewParam name="produto" value="#{cadastroProdutoBean.produto}"/>  -->
+		 	<f:viewParam name="cliente" value="#{cadastroClienteBean.cliente}"/>	    	
+	     </f:metadata>
+	
+		<h1>#{cadastroClienteBean.editando ? 'Editando cliente' : 'Novo cliente'}</h1>
+		
+		<p:messages closable="true">
+			<p:autoUpdate/>
+		</p:messages>
+		
 		
 		<!-- Grupos de Barras de Ferramentas -->
 		<p:toolbar style="margin-top: 20px; margin-bottom: 20px; padding: 5px">
@@ -31,13 +42,13 @@
 				<!-- outcome ==> para dever ir ao clicar -->
 				<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
 				<!-- Botao para SALVAR um novo produto -->
-				<p:commandButton value="Salvar" id="botaoSalvar"></p:commandButton>
+				<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroClienteBean.salvar}" update="@form"></p:commandButton>
 				
 			</p:toolbarGroup>
 			
 			<!-- Parte Direita da Barra -->
 			<p:toolbarGroup align="right">
-				<p:button value="Pesquisa"></p:button>
+				<p:button value="Pesquisa" outcome="/clientes/PesquisaCliente"></p:button>
 			</p:toolbarGroup>
 		</p:toolbar>		
 		
@@ -45,19 +56,30 @@
 		<p:panelGrid columns="2" id="painel" style="width : 100%; margin-top: 20px" columnClasses="rotulo,campo">
 			
 			<p:outputLabel value="Nome" for="nome"/>
-    		<p:inputText id="nome" size="100" maxlength="100"/>
+    		<p:inputText id="nome"  value="#{cadastroClienteBean.cliente.nome}" size="100" maxlength="100"/>
     		
     		 <p:outputLabel value="Tipo" for="tipo"/>
-             <p:selectOneRadio id="tipo" required="false" >
-                 <f:selectItem itemLabel="Pessoa Física" itemValue="PF"/>
-                 <f:selectItem itemLabel="Pessoa Jurídica" itemValue="PJ"/>
-             </p:selectOneRadio>
+    		 <p:selectOneMenu id="tipo" style="width: 5%"  value="#{cadastroClienteBean.cliente.tipo}">
+					<p:ajax event="change" process="tipo" update="documentoReceitaFederal" />
+					<f:selectItem itemLabel="CPF" itemValue="FISICA" />
+					<f:selectItem itemLabel="CNPJ" itemValue="JURIDICA" />
+			</p:selectOneMenu>
 
-    		 <p:outputLabel value="CNPJ" for="cnpj"/>
-             <p:inputMask id="cnpj" value="" mask="99.999.999/9999-99" required="false"/>
+    		 <p:outputLabel value="CPF/CNPJ" for="documentoReceitaFederal"/>
+             <h:panelGroup id="documentoReceitaFederal">
+					<p:inputMask id="cnpj" mask="99.999.999/9999-99" size="18"
+						maxlength="18"
+						value="#{cadastroClienteBean.cliente.documentoReceitaFederal}" 
+						rendered="#{cadastroClienteBean.pessoaJuridica}"/>
+						
+					<p:inputMask id="cpf" mask="999.999.999-99" size="18"
+						maxlength="14"
+						value="#{cadastroClienteBean.cliente.documentoReceitaFederal}" 
+						rendered="#{cadastroClienteBean.pessoaFisica}"/>
+				</h:panelGroup>
              
              <h:outputLabel for="email" value="Email:" />
-             <p:inputText id="email1" value="" />
+             <p:inputText id="email1" value="#{cadastroClienteBean.cliente.email}" />
 		</p:panelGrid>
 		
 		<p:commandButton style="margin-top: 20px; height: 34px;" value="Adicionar Endereço" id="adicionarEnderecoCliente" 
@@ -67,32 +89,30 @@
 		
 		<p:dialog id="inclusaoEnderecoClienteDialog" header="Inclusão de Endereço do Cliente" widgetVar="inclusaoEnderecoCliente"  modal="true" resizable="false">
 			<h:panelGroup id="inclusaoPainel">
-				<p:messages>
-					<p:autoUpdate/>
-			    </p:messages>
+
 				<p:panelGrid columns="2" id="inclusaoEnderecoClientePanelGrid">
 					<p:outputLabel value="Logradouro" for="logradouro"/>
-					<p:inputText id="logradouro" required="true" size="60" 
+					<p:inputText id="logradouro" required="false" size="60" 
 						requiredMessage="O Preenchimento do campo 'logradouro' é obrigatório!"/>
 
 					<p:outputLabel value="Complemento" for="complemento"/>
-					<p:inputText id="complemento" required="true"  size="40" 
+					<p:inputText id="complemento" required="false"  size="40" 
 						requiredMessage="O Preenchimento do campo 'complemento' é obrigatório!"/>
 											
 					<p:outputLabel value="Número" for="numero"/>
-					<p:inputMask mask="9*" id="numero" required="true"  maxlength="6" size="6" 
+					<p:inputMask mask="9*" id="numero" required="false"  maxlength="6" size="6" 
 						requiredMessage="O Preenchimento do campo telefone é obrigatório!"/>
 
 					<p:outputLabel value="CEP" for="cep"/>
-					<p:inputMask mask="99.999-999" id="cep" required="true"  maxlength="10" size="10" 
+					<p:inputMask mask="99.999-999" id="cep" required="false"  maxlength="10" size="10" 
 						requiredMessage="O Preenchimento do campo telefone é obrigatório!"/>
 											
 					<p:outputLabel value="Cidade" for="cidade"/>
 						<p:columnGroup>
-							<p:inputText id="cidade" required="true"  size="35" requiredMessage="O Preenchimento do campo 'cidade' é obrigatório!"/>			
+							<p:inputText id="cidade" required="false"  size="35" requiredMessage="O Preenchimento do campo 'cidade' é obrigatório!"/>			
 															
 							<p:outputLabel value="UF/Província" for="uf" style="padding-left: 25px;" />
-							<p:inputText id="uf" style="float: right; padding-right: 20px;" required="true"  size="2" requiredMessage="O Preenchimento do campo 'UF/Província' é obrigatório!"/>							
+							<p:inputText id="uf" style="float: right; padding-right: 20px;" required="false"  size="2" requiredMessage="O Preenchimento do campo 'UF/Província' é obrigatório!"/>							
 						 <span style="clear: both"></span>
 						</p:columnGroup>			
 					<p:outputLabel/> 										
@@ -104,7 +124,7 @@
 				</p:panelGrid>				
 			</h:panelGroup>			
 		</p:dialog>
-			
+				</h:form>	
 		<p:dataTable id="enderecoAdicionadoTable" value="" var=""
 	    		style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
 	    		rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
@@ -134,6 +154,7 @@
 	    		<p:button value="Não" onclick="PF('confirmacaoExclusaoEnderecoCliente').hide(); return false;" />
 	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusaoEnderecoCliente').hide();" />
 	    	</p:confirmDialog>
+
 
 	</ui:define>
 

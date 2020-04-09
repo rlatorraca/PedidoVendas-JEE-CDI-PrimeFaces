@@ -49,8 +49,7 @@ public class PesquisaUsuariosBean implements Serializable {
 		usuariosFiltrados.remove(usuarioSelecionado);
 		
 		FacesUtil.addInfoMessage("Usuário " + usuarioSelecionado.getNome() + " (" + usuarioSelecionado.getEmail() + ") foi excluído com sucesso!");
-		limpar()
-;	}
+	}
 
 	public List<Usuario> getUsuariosFiltrados() {
 		return usuariosFiltrados;

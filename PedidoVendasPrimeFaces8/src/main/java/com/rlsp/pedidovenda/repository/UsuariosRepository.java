@@ -45,6 +45,7 @@ public class UsuariosRepository	implements Serializable{
 			return gerenciador.find(Usuario.class, id);
 		}
 		
+		@Transactional
 		public Usuario salvarAlterar(Usuario usuario) {
 			
 			return usuario = gerenciador.merge(usuario); //Inserir ou Alterar;;

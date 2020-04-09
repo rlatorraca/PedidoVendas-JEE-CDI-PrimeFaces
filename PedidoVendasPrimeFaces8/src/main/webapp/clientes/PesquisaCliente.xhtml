@@ -8,48 +8,77 @@
     <ui:define name="titulo">Pesquisa de pedidos</ui:define>
     
     <ui:define name="corpo">
-    	<h:form>
+    	<h:form id="frmPesquisaCliente"  onkeypress="if (event.keyCode == 13) {event.preventDefault()}">
+	    	
+	     
 	    	<h1>Pesquisa de Clientes</h1>
+	    	
+	    	<p:messages closable="true">
+				<p:autoUpdate/>
+			</p:messages>
 	    	
 	    	<!-- ToolBar -->
 	    	<p:toolbar style="margin-top: 20px; margin-bottom: 20px; padding: 5px">
 	    	
 	    		<p:toolbarGroup>
-	    			<p:commandButton value="Pesquisar" />
+	    			<p:commandButton value="Pesquisar" action="#{pesquisaClientesBean.pesquisarFiltrados}" update="@form"/>
 	    		</p:toolbarGroup>
 	    	
 	    		<p:toolbarGroup align="right">
-	    			<p:button value="Novo" />
+	    			<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
 	    		</p:toolbarGroup>
 	    	</p:toolbar>
 	    	
 	    	<!-- Panel Grid -->
 	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 	    	
-	    	 	<p:outputLabel value="CPF/CNPJ" for="cpfcnpj"/>
-             	<p:inputMask id="cpfcnpj" value="" mask="99.999.999/9999-99" required="false"/>           	
-
-	    		
+	    	 	   		
 	    		<p:outputLabel value="Nome" />
-	    		<p:inputText size="100" />
+	    		<p:inputText size="100" value="#{pesquisaClientesBean.filtro.nome}" />
+	    		
+	    		<p:outputLabel value="Tipo" for="tipo"/>
+		    		<p:selectOneMenu id="tipo" style="width: 5%"  value="#{pesquisaClientesBean.clienteSelecionado.tipo}">
+							<p:ajax event="change" process="tipo" update="documentoReceitaFederal" />
+							<f:selectItem itemLabel="CPF" itemValue="FISICA" />
+							<f:selectItem itemLabel="CNPJ" itemValue="JURIDICA" />
+					</p:selectOneMenu>
+	    		
+	    		
+	    		 <p:outputLabel value="CPF/CNPJ" for="documentoReceitaFederal"/>
+		             <h:panelGroup id="documentoReceitaFederal">
+							<p:inputMask id="cnpj" mask="99.999.999/9999-99" size="18"
+								maxlength="18"
+								value="#{pesquisaClientesBean.filtro.documentoReceitaFederal}" 
+								rendered="#{pesquisaClientesBean.pessoaJuridica}"/>
+								
+							<p:inputMask id="cpf" mask="999.999.999-99" size="18"
+								maxlength="14"
+								value="#{pesquisaClientesBean.filtro.documentoReceitaFederal}" 
+								rendered="#{pesquisaClientesBean.pessoaFisica}"/>
+					</h:panelGroup>
 	    	
 	    	</p:panelGrid>
 	    	
-	    	<p:dataTable id="pedidosTable" value="" var=""
+	    	<p:dataTable id="clientesTable" value="#{pesquisaClientesBean.clientesFiltrados}" var="cliente"
 	    		style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
 	    		rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 	    		<p:column headerText="Nome" style="text-align: left; width: 70%">
-	    			<h:outputText value="Supermercado Joao das Counves"/>	    			
+	    			<h:outputText value="#{cliente.nome}"/>	    			
 	    		</p:column>
 	    		<p:column headerText="Tipo"  style="text-align: left; width: 15%">
-	    			<h:outputText value="Pessoa Jurídica"/>
+	    			<h:outputText value="#{cliente.tipo}"/>
 	    		</p:column>
 	    		<p:column headerText="CPF/CNPJ"  style="text-align: left; width: 15%">
-	    			<h:outputText value="02.493.738/0001-83"/>
+	    			<h:outputText value="#{cliente.documentoReceitaFederal}"/>
 	    		</p:column>
 	    		<p:column headerText="Ações"  style="text-align: center; width: 10%">  <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
-	    			<p:button icon="ui-icon-pencil" title="Editar"/> <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
-	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusaoProduto').show()"  />
+	    			<p:button icon="ui-icon-pencil" title="Editar" outcome="/clientes/CadastroCliente">		 <!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
+	    				<f:param name="cliente" value="#{cliente.id}" ></f:param>	 <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
+	    			</p:button>
+	    		
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusaoCliente').show()"  process="@this" update=":frmPesquisaCliente:confirmacaoExclusaoClienteDialog"> 
+	    				<f:setPropertyActionListener value="#{cliente}" target="#{pesquisaClientesBean.clienteSelecionado}"></f:setPropertyActionListener>
+	    			</p:commandButton>
 	    			<!-- O outcome funciona como um link. Se você quer só direcionar o usuário para uma página, pode usar isso.Geralmente a gente usa action para executar 
 	    			      um método no managed bean que pode direcionar o usuário para outra view dependendo do resultado (ou pode permanecer na mesma página).
 						  ActionListener é usado mais para quando você quer executar alguma coisa antes do action, por exemplo, você poderia usar para registrar o log de 
@@ -58,9 +87,10 @@
 	    		</p:column> 
 	    	</p:dataTable>
 	    	
-	    	<p:confirmDialog header="Exclusão de Cliente" message="Tem certeza que deseja excluir o 'Cliente'?" widgetVar="confirmacaoExclusaoCliente">
+	    	<p:confirmDialog id="confirmacaoExclusaoClienteDialog" header="Exclusão de Cliente" widgetVar="confirmacaoExclusaoCliente" message="Tem certeza que deseja excluir o Cliente #{pesquisaClientesBean.clienteSelecionado.nome} ?"  >
 	    		<p:button value="Não" onclick="PF('confirmacaoExclusaoCliente').hide(); return false;" />
-	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusaoCliente').hide();" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusaoCliente').hide();" action="#{pesquisaClientesBean.excluir}" process="@this"
+	    		 	update=":frmPesquisaCliente:clientesTable"/>
 	    	</p:confirmDialog>
 	    	
     	</h:form>

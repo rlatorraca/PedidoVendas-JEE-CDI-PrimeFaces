@@ -23,26 +23,26 @@ public class Endereco implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank @Size(max = 150)
+	//@NotBlank @Size(max = 150)
 	@Column(nullable = false, length = 150)
 	private String logradouro;
 	
-	@NotBlank @Size(max = 20)
+	//@NotBlank @Size(max = 20)
 	@Column(nullable = false, length = 20)
 	private String numero;
 	
 	@Column(length = 150)
 	private String complemento;
 	
-	@NotBlank @Size(max = 160)
+	//@NotBlank @Size(max = 160)
 	@Column(nullable = false, length = 160)
 	private String cidade;
 	
-	@NotBlank @Size(max = 60)
+	//@NotBlank @Size(max = 60)
 	@Column(nullable = false, length = 60)
 	private String uf;
 	
-	@NotBlank @Size(max = 9)
+	//@NotBlank @Size(max = 9)
 	@Column(nullable = false, length = 9)
 	private String cep;
 	

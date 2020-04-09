@@ -23,7 +23,7 @@
 	    		</p:toolbarGroup>
 	    	
 	    		<p:toolbarGroup align="right">
-	    			<p:button value="Novo" />
+	    			<p:button value="Novo" outcome="/usuarios/CadastroUsuario"/>
 	    		</p:toolbarGroup>
 	    	</p:toolbar>
 	    	
@@ -59,7 +59,7 @@
 	    				
 	    			</p:button>
 	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusaoUsuario').show()"  process="@this" update=":frmPesquisaUsuario:confirmacaoExclusaoUsuarioDialog"> 
-	    				<f:setPropertyActionListener value="#{usuario}" target="#{pesquisaProdutosBean.produtoSelecionado}"></f:setPropertyActionListener>
+	    				<f:setPropertyActionListener value="#{usuario}" target="#{pesquisaUsuariosBean.usuarioSelecionado}"></f:setPropertyActionListener>
 	    			</p:commandButton>
 	    			<!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->	    									  
 	    		</p:column>

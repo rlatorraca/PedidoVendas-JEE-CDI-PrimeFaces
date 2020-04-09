@@ -36,8 +36,8 @@ public class Cliente implements Serializable {
 	@Column(name = "email_cliente", nullable = false, length = 200)
 	private String email;
 	
-	@NotBlank @Size(max = 14)
-	@Column(name = "sin_cliente", nullable = false, length = 14)
+	@NotBlank @Size(max = 18)
+	@Column(name = "sin_cliente", nullable = false, length = 18)
 	private String documentoReceitaFederal;
 	
 	@Enumerated(EnumType.STRING) //Ordinal (0,1,3...) String (texto do Enum)
