@@ -5,11 +5,11 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="titulo">#{cadastroPedidoBean.editando ? "Edição de pedido" : "Novo pedido"}</ui:define>
+    <ui:define name="titulo">#{cadastroPedidoBean.editando ? "Edição de pedido" : "Pesquisa de pedido"}</ui:define>
     
     <ui:define name="corpo">
     	<h:form>
-	    	<h1>#{cadastroPedidoBean.editando ? "Edição de pedido" : "Novo pedido"}</h1>
+	    	<h1>#{cadastroPedidoBean.editando ? "Edição de pedido" : "Pesquisa de pedido"}</h1>
 	    	
 	    	<!-- ToolBar -->
 	    	<p:toolbar style="margin-top: 20px">
@@ -19,7 +19,7 @@
 	    		</p:toolbarGroup>
 	    	
 	    		<p:toolbarGroup align="right">
-	    			<p:button value="Novo" />
+	    			<p:button value="Novo" outcome="/pedidos/CadastroPedido"/>
 	    		</p:toolbarGroup>
 	    	</p:toolbar>
 	    	

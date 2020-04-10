@@ -17,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.validation.SKU;
 
 @Entity
@@ -51,6 +52,22 @@ public class Produto implements Serializable {
 	@JoinColumn(name = "categoria_id", nullable = false)
 	private Categoria categoria;
 
+	
+	public void baixarEstoque(Integer quantidade) {
+		int novaQuantidade = this.getQuantidadeEstoque() - quantidade;
+		
+		if (novaQuantidade < 0) {
+			throw new NegocioException("Não há disponibilidade no estoque de " + quantidade + " itens do produto " + this.getSku() + ".");
+		}
+		
+		this.setQuantidadeEstoque(novaQuantidade);
+	}
+	
+	/**
+	 * GETTERS AND SETTERS
+	 * @return
+	 */
+	
 	public Long getId() {
 		return id;
 	}
@@ -123,5 +140,7 @@ public class Produto implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 }

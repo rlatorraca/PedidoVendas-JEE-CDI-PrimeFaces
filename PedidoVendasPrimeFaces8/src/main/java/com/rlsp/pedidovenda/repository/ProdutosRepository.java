@@ -84,6 +84,16 @@ public class ProdutosRepository  implements Serializable{
 		
 		return gerenciador.find(Produto.class, id);
 	}
+	
+	public Produto porSku(String sku) {
+		try {
+			return gerenciador.createQuery("from Produto where upper(sku) = :sku", Produto.class)
+				.setParameter("sku", sku.toUpperCase())
+				.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 
 	@Transactional
 	public void remover(Produto produto) {
@@ -95,4 +105,11 @@ public class ProdutosRepository  implements Serializable{
 			throw new NegocioException("Produto não pode ser excluído."); // Lanca um ERROR em casa de problemas com a exclusao
 		}
 	}
+	
+	public List<Produto> porNome(String nome) {
+		return this.gerenciador.createQuery("from Produto where upper(nome) like :nome", Produto.class)
+				.setParameter("nome", "%" + nome.toUpperCase() + "%").getResultList();
+	}
+
+	
 }

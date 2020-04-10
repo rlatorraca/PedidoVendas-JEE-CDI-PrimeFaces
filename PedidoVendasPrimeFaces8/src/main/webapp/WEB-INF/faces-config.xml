@@ -9,7 +9,7 @@
 		<message-bundle>com.rlsp.pedidovenda.Messages</message-bundle>
 	
 		<locale-config>
-			<default-locale>pt_BR</default-locale>
+			<default-locale>pt_BR</default-locale>			
 		</locale-config>
 	</application>
     

@@ -24,10 +24,10 @@ public class ItemPedido implements Serializable {
 	private Long id;
 	
 	@Column(name="quantidade_item_pedido", nullable = false)
-	private Integer quantidade;
+	private Integer quantidade = 1;
 	
 	@Column(name="valor_unitario_item_pedido", nullable = false, precision = 10, scale = 2)
-	private BigDecimal valorUnitario;
+	private BigDecimal valorUnitario = BigDecimal.ZERO;
 	
 	//Muitos ITENS PEDIDO tem **1** PRODUTO (SEMPRE terá 1 produto) ou 1 PRODUTO pode ter 1+ ITENS de PEDIDO
 	@ManyToOne
@@ -49,6 +49,26 @@ public class ItemPedido implements Serializable {
 	@Transient
 	public BigDecimal getValorTotal() {
 		return this.getValorUnitario().multiply(new BigDecimal(this.getQuantidade()));
+	}
+	
+	/**
+	 * Verifica se o ITEM tem um PRODUTO associado a ele 
+	 */
+	@Transient
+	public boolean isProdutoAssociado() {
+		return this.getProduto() != null && this.getProduto().getId() != null;
+	}
+	
+	@Transient
+	public boolean isEstoqueSuficiente() {
+		return this.getPedido().isEmitido() 
+				|| this.getProduto().getId() == null 
+				|| this.getProduto().getQuantidadeEstoque() >= this.getQuantidade(); 
+	}
+	
+	@Transient
+	public boolean isEstoqueInsuficiente() {
+		return !this.isEstoqueSuficiente();
 	}
 
 	public Long getId() {

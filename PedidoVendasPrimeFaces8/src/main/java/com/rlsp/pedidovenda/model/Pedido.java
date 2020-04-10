@@ -78,7 +78,7 @@ public class Pedido implements Serializable {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name="status_pedido", nullable = false, length = 20)
-	private StatusPedido status;
+	private StatusPedido status = StatusPedido.ORCAMENTO;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -152,6 +152,79 @@ public class Pedido implements Serializable {
 	public boolean isExistente() {
 		return !isNovo();
 	}
+	
+	/**
+	 * Adiciona um linha vazia no carregameto da Pagina de Cadastro de Pedidos
+	 */
+	public void adicionarItemVazio() {
+		if (this.isOrcamento()) {
+			Produto produto = new Produto();
+			//produto.setQuantidadeEstoque(1);
+			
+			ItemPedido item = new ItemPedido();			
+			item.setProduto(produto);
+			item.setPedido(this);
+			
+			this.getItens().add(0, item); // adiciona o item vazio na 1ª linha ( a linha editavel)
+		}
+	}
+
+	/**
+	 * Server para verificar se pode ser inserida a LINHA PADRAO para entrada de pedidos
+	 */		
+	@Transient
+	public boolean isOrcamento() {
+		return StatusPedido.ORCAMENTO.equals(this.getStatus());
+	}
+
+	
+	
+
+	public void removerItemVazio() {
+		
+		ItemPedido primeiroItem = this.getItens().get(0);
+		
+		//Se a posicao ZERO existir e NAO TIVER nenhum PRODUTO vinculado a ele, esta e a PRIMEIRA LINHA (Default) para inclusao de ITENS
+		if(primeiroItem !=null && primeiroItem.getProduto().getId() == null) {
+			this.getItens().remove(0);
+		}
+		
+	}
+
+	/**
+	 * Verifica se o VALOR TOTAL e NEGATIVO
+	 * @return
+	 */
+	@Transient
+	public boolean isValorTotalNegativo() {
+		
+		return this.getValorTotal().compareTo(BigDecimal.ZERO) < 0; // Verifica se o VAlor TOTAL (BigDecimal) é MENOR que ZERO (NEGATIVO)
+	}
+
+	/**
+	 * Verifica so estado do Pedido é EMITIDO
+	 */
+	@Transient
+	public boolean isEmitido() {
+		return StatusPedido.EMITIDO.equals(this.getStatus());
+	}
+	
+	@Transient
+	public boolean isNaoEmissivel() {
+		return !this.isEmissivel();
+	}
+
+	@Transient
+	public boolean isEmissivel() {
+		return this.isExistente() && this.isOrcamento();
+	}
+	
+	
+	
+	/**
+	 * Getters and Setters
+	 * @return
+	 */
 
 	public Long getId() {
 		return id;
@@ -281,5 +354,4 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
-
 }
