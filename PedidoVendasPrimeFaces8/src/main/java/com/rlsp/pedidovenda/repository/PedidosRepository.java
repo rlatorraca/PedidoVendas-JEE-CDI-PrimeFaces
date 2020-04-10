@@ -75,4 +75,9 @@ public class PedidosRepository implements Serializable {
 		return this.manager.merge(pedido);
 	}
 
+	public Pedido porId(Long id) {
+	
+		return this.manager.find(Pedido.class, id);
+	}
+
 }

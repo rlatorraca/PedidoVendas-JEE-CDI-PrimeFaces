@@ -42,10 +42,10 @@ public class UsuarioConverter implements Converter<Object> {
 		if(value != null) {
 			Long id = Long.parseLong(value);
 			retorno = usuarioRepository.porId(id);
-			return retorno;
+			
 			
 		}
-		return null;
+		return retorno;
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class UsuarioConverter implements Converter<Object> {
 			Usuario usuario = (Usuario) value;
 			return usuario.getId() == null ? null : usuario.getId().toString();
 		}
-		return null;
+		return "";
 	}
 
 }

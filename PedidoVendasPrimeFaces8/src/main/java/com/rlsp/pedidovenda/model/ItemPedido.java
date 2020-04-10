@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="itemPedido")
@@ -37,6 +38,18 @@ public class ItemPedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="pedido_id", nullable = false)
 	private Pedido pedido;
+	
+	
+	/**
+	 * Serve para calcular o valor do item (item x quantidade)
+	 *  ** Usado por ""Pedido.recularValorTotalPedido""
+	 *  
+	 * @Transient ==> nao sera gravado no DB
+	 */
+	@Transient
+	public BigDecimal getValorTotal() {
+		return this.getValorUnitario().multiply(new BigDecimal(this.getQuantidade()));
+	}
 
 	public Long getId() {
 		return id;

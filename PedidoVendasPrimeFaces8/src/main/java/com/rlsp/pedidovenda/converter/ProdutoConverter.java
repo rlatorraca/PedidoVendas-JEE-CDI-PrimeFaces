@@ -41,10 +41,10 @@ public class ProdutoConverter implements Converter<Object> {
 		if(value != null) {
 			Long id = Long.parseLong(value);
 			retorno = produtoRepository.porId(id);
-			return retorno;
+			
 			
 		}
-		return null;
+		return retorno;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class ProdutoConverter implements Converter<Object> {
 			Produto produto = (Produto) value;
 			return produto.getId() == null ? null : produto.getId().toString();
 		}
-		return null;
+		return "";
 	}
 
 }

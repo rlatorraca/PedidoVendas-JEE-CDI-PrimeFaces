@@ -46,7 +46,7 @@ public class ClienteConverter implements Converter<Object> {
 			return retorno;
 			
 		}
-		return null;
+		return retorno;
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class ClienteConverter implements Converter<Object> {
 			Cliente cliente = (Cliente) value;
 			return cliente.getId() == null ? null : cliente.getId().toString();
 		}
-		return null;
+		return "";
 	}
 
 }

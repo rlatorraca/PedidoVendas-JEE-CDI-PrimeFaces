@@ -43,6 +43,7 @@ public class CadastroPedidoBean implements Serializable {
 	public void inicializar() {
 		if (FacesUtil.isNotPostBack()) {
 			this.vendedores = this.usuarioRepository.vendedores();
+			this.recalcularPedido(); // Chama funcao para recacular os itens caso o Pedido NAO SEJA novo
 		}
 	}
 	
@@ -65,12 +66,30 @@ public class CadastroPedidoBean implements Serializable {
 		return this.clienteRepository.porNome(nome);
 	}
 
+	public void recalcularPedido() {
+		
+		/**
+		 * Se o pedido EXISTIR, sera recalculados os valores
+		 */
+		if (this.pedido != null) {
+			pedido.recularValorTotalPedido();
+		}	
+	}
 	public Pedido getPedido() {
 		return pedido;
+	}
+		
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	public List<Usuario> getVendedores() {
 		return vendedores;
+	}
+	
+	public boolean isEditando() {
+		return this.pedido.getId() != null;
 	}
 	
 	

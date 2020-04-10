@@ -41,11 +41,10 @@ public class GrupoConverter implements Converter<Object> {
 		
 		if(value != null) {
 			Long id = Long.parseLong(value);
-			retorno = grupoRepository.porId(id);
-			return retorno;
+			retorno = grupoRepository.porId(id);			
 			
 		}
-		return null;
+		return retorno;
 	}
 
 	@Override
@@ -59,7 +58,7 @@ public class GrupoConverter implements Converter<Object> {
 			Grupo grupo = (Grupo) value;
 			return grupo.getId() == null ? null : grupo.getId().toString();
 		}
-		return null;
+		return "";
 	}
 
 }

@@ -5,11 +5,11 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="titulo">Pesquisa de pedidos</ui:define>
+    <ui:define name="titulo">#{cadastroPedidoBean.editando ? "Edição de pedido" : "Novo pedido"}</ui:define>
     
     <ui:define name="corpo">
     	<h:form>
-	    	<h1>Pesquisa de Pedidos</h1>
+	    	<h1>#{cadastroPedidoBean.editando ? "Edição de pedido" : "Novo pedido"}</h1>
 	    	
 	    	<!-- ToolBar -->
 	    	<p:toolbar style="margin-top: 20px">
@@ -81,8 +81,9 @@
 	    			<h:outputText value="#{pedido.status.descricao}"/>
 	    		</p:column>
 	    		<p:column headerText="Ações" style="text-align: center; width: 50px">  
-	    		<p:button icon="ui-icon-pencil" title="Editar"/> 
-	    			
+		    		<p:button icon="ui-icon-pencil" title="Editar" outcome="/pedidos/CadastroPedido">
+		    				<f:param name="pedido" value="#{pedido.id}" />
+		    		</p:button>		
 	    			<!-- usa-se button pois LEVARA o usuario para OUTRA PAGINA, usa o "outcome"-->
 	    			<!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
 	    			<!-- O outcome funciona como um link. Se você quer só direcionar o usuário para uma página, pode usar isso.Geralmente a gente usa action para executar 

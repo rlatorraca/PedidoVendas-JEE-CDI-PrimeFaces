@@ -45,10 +45,10 @@ public class CategoriaConverter implements Converter<Object> {
 		if(value != null) {
 			Long id = Long.parseLong(value);
 			retorno = categoriasRepository.porId(id);
-			return retorno;
+			
 			
 		}
-		return null;
+		return retorno;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class CategoriaConverter implements Converter<Object> {
 			return ((Categoria) value).getId().toString();
 		}
 		
-		return null;
+		return "";
 	}
 
 }
