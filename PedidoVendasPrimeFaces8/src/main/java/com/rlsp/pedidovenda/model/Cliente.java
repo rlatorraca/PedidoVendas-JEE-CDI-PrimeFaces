@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -52,8 +53,9 @@ public class Cliente implements Serializable {
 	 *  	"Endereco"
 	 */
 
-	@OneToMany(mappedBy = "cliente" ,cascade = CascadeType.ALL) 
-	private List<Endereco> enderecos = new ArrayList<>(); //Cliente tem 1+ Enderecos
+
+	@OneToMany(mappedBy = "cliente" ,cascade = CascadeType.ALL, orphanRemoval = true) 
+	private List<Endereco> enderecos = new ArrayList<Endereco>(); //Cliente tem 1+ Enderecos
 
 	public Long getId() {
 		return id;

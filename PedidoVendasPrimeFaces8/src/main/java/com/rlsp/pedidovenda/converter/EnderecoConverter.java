@@ -5,7 +5,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import com.rlsp.pedidovenda.model.Endereco;
 import com.rlsp.pedidovenda.model.Usuario;
+import com.rlsp.pedidovenda.repository.EnderecosRepository;
 import com.rlsp.pedidovenda.repository.UsuariosRepository;
 import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
 
@@ -14,21 +16,21 @@ import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
  *  - @FacesConverter ==> diz que eh um conversor
  *  - forClass = Categoria.class ==> para a Entidade Categoria
  */
-@FacesConverter(forClass = Usuario.class)
-public class UsuarioConverter implements Converter<Object> {
+@FacesConverter(forClass = Endereco.class)
+public class EnderecoConverter implements Converter<Object> {
 
 	/**
 	 * IMPORTANTE
 	 *  - @Inject ==> NAO FUNCIONA DENTRO DO CONVERTER/CONVERSOR
 	 */
 	//@Inject
-	private UsuariosRepository usuarioRepository;
+	private EnderecosRepository enderecoRepository;
 	
-	public UsuarioConverter() {
+	public EnderecoConverter() {
 		/**
 		 * Como a @Inject nao funciona temos que chamar o metodos getBean() na Classe CDIServiceLocator passando uma CLASSE para RETORNAR um INSTANCIA DA CLASSE no contexto da CDI
 		 */
-		usuarioRepository = CDIServiceLocator.getBean(UsuariosRepository.class); 
+		enderecoRepository = CDIServiceLocator.getBean(EnderecosRepository.class); 
 		
 	}
 	
@@ -36,11 +38,11 @@ public class UsuarioConverter implements Converter<Object> {
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		
 		
-		Usuario retorno = null;
+		Endereco retorno = null;
 		
 		if(value != null) {
 			Long id = Long.parseLong(value);
-			retorno = usuarioRepository.porId(id);
+			retorno = enderecoRepository.porId(id);
 			
 			
 		}
@@ -51,8 +53,8 @@ public class UsuarioConverter implements Converter<Object> {
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		
 		if(value != null) {
-			Usuario usuario = (Usuario) value;
-			return usuario.getId() == null ? null : usuario.getId().toString();
+			Endereco endereco = (Endereco) value;
+			return endereco.getId() == null ? null : endereco.getId().toString();
 		}
 		return "";
 	}

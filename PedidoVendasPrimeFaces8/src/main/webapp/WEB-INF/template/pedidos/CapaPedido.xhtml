@@ -17,23 +17,24 @@
         <h:outputText value="#{cadastroPedidoBean.pedido.status.descricao}" />
         
         <p:outputLabel value="Vendedor" for="vendedor" />
-        <p:selectOneMenu id="vendedor" value="#{cadastroPedidoBean.pedido.vendedor}" >
+        <p:selectOneMenu id="vendedor" value="#{cadastroPedidoBean.pedido.vendedor}" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}">
          	  <f:selectItem itemLabel="Selecione Vendedor" />
               <f:selectItems value="#{cadastroPedidoBean.vendedores}" var="vendedor" itemValue="#{vendedor}" itemLabel="#{vendedor.nome}" />
         </p:selectOneMenu>
         
         <p:outputLabel value="Cliente" for="cliente"/>
         <p:autoComplete id="cliente" size="40" dropdown="true" value="#{cadastroPedidoBean.pedido.cliente}" completeMethod="#{cadastroPedidoBean.completarCliente}"
-        	var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true" />
+        	var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}" />
         
         <p:outputLabel value="Forma de pagamento" for="formaPagamento"/>
-        <p:selectOneMenu id="formaPagamento" value="#{cadastroPedidoBean.pedido.formaPagamento}">
+        <p:selectOneMenu id="formaPagamento" value="#{cadastroPedidoBean.pedido.formaPagamento}" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}" >
              <f:selectItem itemLabel="Selecione Forma de Pagamento" />
              <f:selectItems value="#{cadastroPedidoBean.formasPagamento}" var="formaPagamento" itemValue="#{formaPagamento}" itemLabel="#{formaPagamento.descricao}" />
         </p:selectOneMenu>
         
         <p:outputLabel value="Valor do frete" for="valorFrete"/>
-        <p:inputText id="valorFrete" size="10" maxlength="10" styleClass="moeda" value="#{cadastroPedidoBean.pedido.valorFrete}">
+        <p:inputText id="valorFrete" size="10" maxlength="10" styleClass="moeda" value="#{cadastroPedidoBean.pedido.valorFrete}" 
+        	disabled="#{cadastroPedidoBean.pedido.naoAlteravel}" >
         	<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
         	
         	<p:ajax event="change" process="@this" update="totalPedido" listener="#{cadastroPedidoBean.recalcularPedido}" />

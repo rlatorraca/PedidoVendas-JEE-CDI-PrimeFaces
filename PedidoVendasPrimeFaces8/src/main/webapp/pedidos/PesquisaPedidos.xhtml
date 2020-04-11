@@ -72,12 +72,12 @@
 	    				<f:convertDateTime pattern="dd/MM/yyyy" />
 	    			</h:outputText>
 	    		</p:column>
-	    		<p:column headerText="Valor total" style="text-align: right; width: 120px">
-	    			<h:outputText value="#{pedido.valorTotal}">
+	    		<p:column headerText="Valor total" style="text-align: center; width: 120px">
+	    			<h:outputText value="#{pedido.valorTotal}" style="text-align: right;" >
 	    				<f:convertNumber type="currency"/>
 	    			</h:outputText>
 	    		</p:column>
-	    		<p:column headerText="Status" style="width: 100px">
+	    		<p:column headerText="Status"  style="text-align: center; width: 100px">
 	    			<h:outputText value="#{pedido.status.descricao}"/>
 	    		</p:column>
 	    		<p:column headerText="Ações" style="text-align: center; width: 50px">  

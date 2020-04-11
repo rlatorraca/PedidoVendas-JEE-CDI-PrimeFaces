@@ -52,7 +52,7 @@
 	    		
 	
 	    		<h:outputLabel for="email" value="Email :" />
-	            <p:inputText id="email" value="#{cadastroUsuarioBean.usuario.email}" autocomplete="off" />
+	            <p:inputText id="email" value="#{cadastroUsuarioBean.usuario.email}" autocomplete="off" required="true"/>
 	             
 	            <p:outputLabel value="Senha" for="senha" />
 				<p:password id="senha" required="true" value="#{cadastroUsuarioBean.usuario.senha}" autocomplete="new-password"

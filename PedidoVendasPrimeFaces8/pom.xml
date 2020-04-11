@@ -122,9 +122,40 @@
 		    <version>3.10</version>
 		</dependency>
 		
-		
+		<!-- Simple-email -->
+		<!-- Abstração para envio de e-mails -->		
+	    <dependency>
+		    <groupId>com.outjected</groupId>
+		    <artifactId>simple-email</artifactId>
+		    <version>1.7</version>
+	    </dependency>    
+
+
+		<!-- Requerido para envio de e-mails -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+			<scope>compile</scope>
+		</dependency>
+
   	
   </dependencies>
+  
+  <repositories>
+  		<repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+  		<repository>
+			<id>clearfly-releases</id>
+			<name>Clearfly Releases Maven Repository</name>
+			<url>https://mvn.clearfly.net/artifactory/libs-release</url>
+			<layout>default</layout>
+		</repository>
+  </repositories>
   
   <build>
   	<finalName>PedidoVenda-PrimeFaces8</finalName>

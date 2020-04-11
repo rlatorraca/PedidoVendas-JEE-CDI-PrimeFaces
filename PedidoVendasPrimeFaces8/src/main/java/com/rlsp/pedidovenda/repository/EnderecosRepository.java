@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.rlsp.pedidovenda.model.Endereco;
+import com.rlsp.pedidovenda.model.Usuario;
 import com.rlsp.pedidovenda.util.jpa.Transactional;
 
 public class EnderecosRepository implements Serializable{
@@ -22,4 +23,10 @@ public class EnderecosRepository implements Serializable{
 		
 		return endereco = gerenciador.merge(endereco); //Inserir ou Alterar;;
 	}
+	
+	public Endereco porId(Long id) {
+		
+		return gerenciador.find(Endereco.class, id);
+	}
+	
 }

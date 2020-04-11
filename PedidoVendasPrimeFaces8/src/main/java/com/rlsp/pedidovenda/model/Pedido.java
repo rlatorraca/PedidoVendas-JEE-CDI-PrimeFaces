@@ -219,7 +219,30 @@ public class Pedido implements Serializable {
 		return this.isExistente() && this.isOrcamento();
 	}
 	
+	@Transient
+	public boolean isCancelavel() {
+		return this.isExistente() && !this.isCancelado();
+	}
+
+	@Transient
+	private boolean isCancelado() {
+		return StatusPedido.CANCELADO.equals(this.getStatus());
+	}
+
+	@Transient
+	public boolean isNaoCancelavel() {
+		return !this.isCancelavel();
+	}
 	
+	@Transient
+	public boolean isAlteravel() {
+		return this.isOrcamento();
+	}
+	
+	@Transient
+	public boolean isNaoAlteravel() {
+		return !this.isAlteravel();
+	}
 	
 	/**
 	 * Getters and Setters

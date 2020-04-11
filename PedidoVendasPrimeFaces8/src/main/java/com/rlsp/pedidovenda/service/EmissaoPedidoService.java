@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
+import com.rlsp.pedidovenda.model.ItemPedido;
 import com.rlsp.pedidovenda.model.Pedido;
 import com.rlsp.pedidovenda.model.StatusPedido;
-import com.rlsp.pedidovenda.repository.PedidosRepository;;
+import com.rlsp.pedidovenda.repository.PedidosRepository;
+import com.rlsp.pedidovenda.util.jpa.Transactional;;
 
 public class EmissaoPedidoService implements Serializable {
 
@@ -21,6 +23,7 @@ public class EmissaoPedidoService implements Serializable {
 	@Inject
 	private PedidosRepository pedidoRespository;
 	
+	@Transactional
 	public Pedido emitir(Pedido pedido) {
 		pedido = this.cadastroPedidoService.salvar(pedido);
 		
@@ -36,5 +39,6 @@ public class EmissaoPedidoService implements Serializable {
 		
 		return pedido;
 	}
+	
 	
 }

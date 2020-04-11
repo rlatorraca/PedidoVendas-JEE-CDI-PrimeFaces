@@ -109,3 +109,8 @@ footer {
 #grupoUsuario_label {
 	padding: 8px !important;
 }
+
+/*Opacidade do Campos Desabilitados*/
+.ui-state-disabled{
+	opacity: .80 !important;
+} 

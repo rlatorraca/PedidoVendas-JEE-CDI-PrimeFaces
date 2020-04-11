@@ -1,18 +1,20 @@
 package com.rlsp.pedidovenda.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.rlsp.pedidovenda.filter.ClienteFilter;
 import com.rlsp.pedidovenda.model.Cliente;
 import com.rlsp.pedidovenda.model.Endereco;
 import com.rlsp.pedidovenda.model.TipoPessoa;
 import com.rlsp.pedidovenda.repository.ClientesRepository;
+import com.rlsp.pedidovenda.repository.EnderecosRepository;
 import com.rlsp.pedidovenda.service.CadastroClienteService;
+import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 
 @Named
@@ -25,21 +27,55 @@ public class CadastroClienteBean implements Serializable {
 	private ClientesRepository clienteRepository;
 	
 	@Inject
+	private EnderecosRepository enderecoRepository;
+	
+	@Inject
 	private CadastroClienteService clienteService;
 	
 	private Cliente cliente;
+	private Endereco endereco;
+	private Endereco enderecoSelecionado;
+	private boolean editandoEndereco;
+	
+	private List<Cliente> clientes = new ArrayList<>(); 
+	private List<Endereco> enderecos  = new ArrayList<>(); 
+	
+	public CadastroClienteBean() {				
+			limpar();		
+	}
+	
+	public boolean isEditando() {
+		if (cliente != null && cliente.getId() != null) {
+			enderecos = cliente.getEnderecos();			
+			
+			return true;
+		}
+			return  false;
+		
+	}
 
+	public boolean isEditandoEndereco() {
+		return editandoEndereco;
+	}
 	
-	private List<Cliente> clientes; 
-	private List<Endereco> enderecos; 
-	
-	public CadastroClienteBean() {		
-		limpar();	
+	public void adicionarEndereco() {
+		
+			this.endereco.setCliente(this.cliente);
+			this.cliente.getEnderecos().add(endereco);		
+			limparEndereco();
+			
 	}
 
 	private void limpar() {
 		cliente = new Cliente();
 		cliente.setTipo(TipoPessoa.FISICA);
+		limparEndereco();
+	}
+	
+	public void removerEndereco() {
+		this.cliente.getEnderecos().remove(enderecoSelecionado);
+		FacesUtil.addInfoMessage("Endereco excluído com sucesso!");
+		limparEndereco();
 	}
 	
 	//Confirma se foi escolhido PF, logo CPF
@@ -52,14 +88,27 @@ public class CadastroClienteBean implements Serializable {
 		return TipoPessoa.JURIDICA.equals(this.cliente.getTipo());
 	}
 	
-	public boolean isEditando() {
-		return this.cliente.getId() != null;
+		
+	public void salvar() {
+		if(!cliente.getEnderecos().isEmpty()) {
+			try {
+				clienteService.salvar(cliente);
+				limpar();
+
+				FacesUtil.addInfoMessage("Cliente salvo com sucesso!");
+			} catch (NegocioException e) {
+				FacesUtil.addErrorMessage(e.getMessage());
+			}
+		
+		} else {
+			FacesUtil.addErrorMessage("Endereço não cadastrado");
+		}
+	
 	}
 	
-	public void salvar() {
-		this.cliente = clienteService.salvar(this.cliente);
-		limpar();
-		FacesUtil.addInfoMessage("Cliente salvo com sucesso");
+	public void limparEndereco() {
+		endereco = new Endereco();
+		this.editandoEndereco = false;
 	}
 	
 	public TipoPessoa[] getTipoPessoa() {
@@ -88,6 +137,26 @@ public class CadastroClienteBean implements Serializable {
 
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public void setEditandoEndereco(boolean editandoEndereco) {
+		this.editandoEndereco = editandoEndereco;
+	}
+
+	public Endereco getEnderecoSelecionado() {
+		return enderecoSelecionado;
+	}
+
+	public void setEnderecoSelecionado(Endereco enderecoSelecionado) {
+		this.enderecoSelecionado = enderecoSelecionado;
 	}
 	
 	
