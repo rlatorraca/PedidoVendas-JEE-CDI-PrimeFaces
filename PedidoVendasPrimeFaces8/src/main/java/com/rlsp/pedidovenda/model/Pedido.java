@@ -244,6 +244,11 @@ public class Pedido implements Serializable {
 		return !this.isAlteravel();
 	}
 	
+	@Transient
+	public boolean isNaoEnviavelPorEmail() {
+		return this.isNovo() || this.isCancelado();
+	}
+	
 	/**
 	 * Getters and Setters
 	 * @return

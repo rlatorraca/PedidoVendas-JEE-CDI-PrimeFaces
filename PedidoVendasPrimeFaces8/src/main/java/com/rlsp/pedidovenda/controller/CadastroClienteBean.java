@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,7 +33,10 @@ public class CadastroClienteBean implements Serializable {
 	@Inject
 	private CadastroClienteService clienteService;
 	
+	@Produces
+	@ClienteEdicao
 	private Cliente cliente;
+	
 	private Endereco endereco;
 	private Endereco enderecoSelecionado;
 	private boolean editandoEndereco;
@@ -59,11 +63,11 @@ public class CadastroClienteBean implements Serializable {
 	}
 	
 	public void adicionarEndereco() {
-		
+		if(!cliente.getEnderecos().contains(this.endereco)) {
 			this.endereco.setCliente(this.cliente);
 			this.cliente.getEnderecos().add(endereco);		
 			limparEndereco();
-			
+		}	
 	}
 
 	private void limpar() {
@@ -93,6 +97,7 @@ public class CadastroClienteBean implements Serializable {
 		if(!cliente.getEnderecos().isEmpty()) {
 			try {
 				clienteService.salvar(cliente);
+				this.cliente.isNovo();
 				limpar();
 
 				FacesUtil.addInfoMessage("Cliente salvo com sucesso!");

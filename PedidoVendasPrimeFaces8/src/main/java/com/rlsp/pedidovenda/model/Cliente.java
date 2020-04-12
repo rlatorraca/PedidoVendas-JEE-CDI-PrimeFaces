@@ -1,5 +1,6 @@
 package com.rlsp.pedidovenda.model;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,24 @@ public class Cliente implements Serializable {
 
 	@OneToMany(mappedBy = "cliente" ,cascade = CascadeType.ALL, orphanRemoval = true) 
 	private List<Endereco> enderecos = new ArrayList<Endereco>(); //Cliente tem 1+ Enderecos
+	
+	@Transient
+	public boolean isNovo() {
+		return getId() == null;
+	}
+	
+	
+	
+	@Transient
+	public boolean isNaoEnviavelPorEmail() {
+		return this.isNovo();
+	}
+	
+	
+	/**
+	 * GETTERS and SETTERS
+	 * @return
+	 */
 
 	public Long getId() {
 		return id;

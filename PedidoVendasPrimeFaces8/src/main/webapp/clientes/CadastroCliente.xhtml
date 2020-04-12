@@ -24,7 +24,7 @@
 		 <f:metadata>
 		 	<!-- <o:viewParam name="cliente" value="#{cadastroClienteBean.cliente}"/> -->
 		 	<f:viewParam name="cliente" value="#{cadastroClienteBean.cliente}"/>
-		 	<f:viewParam name="endereco" value="#{cadastroClienteBean.cliente.enderecos}"/> 	    	
+		 	<f:viewParam name="endereco" value="#{cadastroClienteBean.endereco}"/> 	    	
 	     </f:metadata>
 	
 		<h1>#{cadastroClienteBean.editando ? 'Editando cliente' : 'Novo cliente'}</h1>
@@ -44,12 +44,14 @@
 				<!-- outcome ==> para dever ir ao clicar -->
 				<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
 				<!-- Botao para SALVAR um novo produto -->
-				<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroClienteBean.salvar}" process="@this painel" update="clienteMensagem painel enderecoAdicionadoTable" />				
+				<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroClienteBean.salvar}" process="@this painel" update="clienteMensagem painel buttonEmailCliente enderecoAdicionadoTable" />				
 				
 			</p:toolbarGroup>
 			
 			<!-- Parte Direita da Barra -->
 			<p:toolbarGroup align="right">
+				<p:commandButton id="buttonEmailCliente" value="Enviar por e-mail" action="#{envioClienteEmailBean.enviarPedido}"
+  				process="@this" disabled="#{cadastroClienteBean.cliente.naoEnviavelPorEmail}" />
 				<p:button value="Pesquisa" outcome="/clientes/PesquisaCliente"></p:button>
 			</p:toolbarGroup>
 		</p:toolbar>		

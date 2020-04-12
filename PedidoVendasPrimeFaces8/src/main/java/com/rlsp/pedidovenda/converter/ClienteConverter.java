@@ -6,9 +6,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.rlsp.pedidovenda.model.Cliente;
-import com.rlsp.pedidovenda.model.Usuario;
 import com.rlsp.pedidovenda.repository.ClientesRepository;
-import com.rlsp.pedidovenda.repository.UsuariosRepository;
 import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
 
 /**

@@ -6,9 +6,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.rlsp.pedidovenda.model.Endereco;
-import com.rlsp.pedidovenda.model.Usuario;
 import com.rlsp.pedidovenda.repository.EnderecosRepository;
-import com.rlsp.pedidovenda.repository.UsuariosRepository;
 import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
 
 /**
@@ -40,7 +38,7 @@ public class EnderecoConverter implements Converter<Object> {
 		
 		Endereco retorno = null;
 		
-		if(value != null) {
+		if(value != null ) {
 			Long id = Long.parseLong(value);
 			retorno = enderecoRepository.porId(id);
 			
@@ -52,7 +50,7 @@ public class EnderecoConverter implements Converter<Object> {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		
-		if(value != null) {
+		if(value != null && !"".equals(value)) {
 			Endereco endereco = (Endereco) value;
 			return endereco.getId() == null ? null : endereco.getId().toString();
 		}

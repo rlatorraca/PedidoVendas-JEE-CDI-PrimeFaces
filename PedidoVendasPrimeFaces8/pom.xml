@@ -131,12 +131,38 @@
 	    </dependency>    
 
 
-		<!-- Requerido para envio de e-mails -->
+		<!-- Requerido para envio de e-mails  - Simples-email depende do javax.mail-->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 			<scope>compile</scope>
+		</dependency>
+		
+		<!-- Apache Velocity - usado para template de emails (como o Freemarker ou ThymLeaf)  -->
+		<dependency>
+  			<groupId>org.apache.velocity</groupId>
+  			<artifactId>velocity-engine-core</artifactId>
+  			<version>2.2</version>
+		</dependency>
+		
+		<!-- Usado para formatacoes em geral do Apache Velocity -->
+		<dependency>
+			<groupId>org.apache.velocity.tools</groupId>
+		    <artifactId>velocity-tools-generic</artifactId>
+		    <version>3.0</version>
+		</dependency>
+		
+		<dependency>
+		     <groupId>org.apache.velocity.tools</groupId>
+		     <artifactId>velocity-tools-view</artifactId>
+		     <version>3.0</version>
+		</dependency>
+		
+		<dependency>
+		     <groupId>org.apache.velocity.tools</groupId>
+		     <artifactId>velocity-tools-view-jsp</artifactId>
+		      <version>3.0</version>
 		</dependency>
 
   	

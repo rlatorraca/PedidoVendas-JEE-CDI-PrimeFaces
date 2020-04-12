@@ -15,7 +15,7 @@ import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
  *  - forClass = Categoria.class ==> para a Entidade Categoria
  */
 @FacesConverter(forClass = Pedido.class)
-public class PedidoConverter implements Converter {
+public class PedidoConverter implements Converter<Object> {
 
 	//@Inject
 	private PedidosRepository pedidoRepository;
