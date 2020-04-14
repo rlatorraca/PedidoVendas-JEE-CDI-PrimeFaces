@@ -25,7 +25,7 @@
 	    		</p:toolbarGroup>
 	    	
 	    		<p:toolbarGroup align="right">
-	    			<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
+	    			<p:button value="Novo" outcome="/clientes/CadastroCliente" disabled="#{not seguranca.salvarClientePermitido}"/>
 	    		</p:toolbarGroup>
 	    	</p:toolbar>
 	    	
@@ -76,7 +76,8 @@
 	    				<f:param name="cliente" value="#{cliente.id}" ></f:param>	 <!-- apenas executa um acao e NAO REMETE a outra pagina, apenas executa um ACAO, usa "actionListener" -->
 	    			</p:button>
 	    		
-	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusaoCliente').show()"  process="@this" update=":frmPesquisaCliente:confirmacaoExclusaoClienteDialog"> 
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusaoCliente').show()"  process="@this" 
+	    				disabled="#{not seguranca.excluirClientePermitido}" update=":frmPesquisaCliente:confirmacaoExclusaoClienteDialog"> 
 	    				<f:setPropertyActionListener value="#{cliente}" target="#{pesquisaClientesBean.clienteSelecionado}"></f:setPropertyActionListener>
 	    			</p:commandButton>
 	    			<!-- O outcome funciona como um link. Se você quer só direcionar o usuário para uma página, pode usar isso.Geralmente a gente usa action para executar 

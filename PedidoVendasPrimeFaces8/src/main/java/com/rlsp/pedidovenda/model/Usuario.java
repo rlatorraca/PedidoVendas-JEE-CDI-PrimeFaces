@@ -39,8 +39,8 @@ public class Usuario implements Serializable {
 	@Column(name = "email_usuario", nullable = false, length = 200, unique = true)
 	private String email;
 	
-	@NotBlank @Size(max = 30)
-	@Column(name = "senha_usuario", nullable = false, length = 30)
+	@NotBlank @Size(max = 300)
+	@Column(name = "senha_usuario", nullable = false, length = 300)
 	private String senha;
 	/**
 	 * O @ManyToMany é um tipo de mapeamento muitos-para-muitos, ou seja, muitos usuários podem ter muitos grupos, e muitos grupos podem ter muitos usuários.

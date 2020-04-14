@@ -12,6 +12,12 @@
         <h:outputStylesheet library="css" name="sistema.css"/>
     </h:head>
     <h:body>
+    
+    	<f:metadata>
+    		<f:viewParam name="dummy" />
+    		<f:event listener="#{loginBean.preRender}" type="preRenderView" />
+    	</f:metadata>
+    
     	<!-- Cabecalho -->
     	<header>
 			<div>
@@ -24,17 +30,23 @@
     	<!-- Login Form -->
     	<div id="login-dialog">
     		<h1>Login</h1>
-    		
-    		<h:form id="frm">
+    		<!-- prependId ==> server para pegar o nome do formulario para ser usado pelo JSF (ex> :frm_login: ...) quando TRUE, quando false nao pega o nome do :frm  -->
+    		<!--  value="@{loginBean.email}" ==> serve pra deixar preenchido o usuario em  -->
+    		<h:form id="frm_login" prependId="false">
+    			
+    			<p:messages closable="true">
+    				<p:autoUpdate/>
+    			</p:messages>
+    			
     			<h:panelGrid columns="2" styleClass="grid-login">
     				<p:outputLabel value="E-mail" />
-    				<p:inputText size="30" />
+    				<p:inputText size="30" id="username" value="#{loginBean.email}"/> 
     				
     				<p:outputLabel value="Senha" />
-    				<p:password size="30" />
+    				<p:password size="30" id="password"/>
     				
     				<h:panelGroup/>
-    				<p:commandButton value="Login" style="text-align: center"/>
+    				<p:commandButton style="text-align: center" value="Login" action="#{loginBean.login}" ajax="false"/>
     			</h:panelGrid>
     		
     		</h:form>

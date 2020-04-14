@@ -69,7 +69,7 @@
 			    	value="#{cadastroUsuarioBean.grupoEscolhido}">	    		
 	    			<f:selectItem itemLabel="Selecione a categoria" style="padding-top: 10px; padding-bottom: 10px;"  noSelectionOption="true"/>
     				<f:selectItems value="#{cadastroUsuarioBean.grupos}" var="grupo"
-	    					itemValue="#{grupo}" itemLabel="#{grupo.nome}" />
+	    					itemValue="#{grupo}" itemLabel="#{grupo.descricao}" />
  					<p:ajax listener="#{cadastroUsuarioBean.imprimir}" ></p:ajax>	
 	    		</p:selectOneMenu>
 	    		

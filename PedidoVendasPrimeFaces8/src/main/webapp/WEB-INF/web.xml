@@ -11,6 +11,20 @@
         <param-value>true</param-value>
   </context-param>
   
+<!--   <context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>bootstrap</param-value>
+	</context-param> -->
+	<context-param>
+		<param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+		<param-value>0</param-value>
+	</context-param>
+    
+  <!-- CDI -->
   <listener>  
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
   </listener>
@@ -38,12 +52,13 @@
 	<param-value>true</param-value>
   </context-param>
 
-  <!-- Usa a SUBMISSAO PARCIAL das partes AJAX do formulario -->
+  <!-- Usa a SUBMISSAO PARCIAL das partes AJAX do formulario 
 	<context-param>
 		<param-name>primefaces.SUBMIT</param-name>
 		<param-value>partial</param-value>
-	</context-param>
+	</context-param> -->
 	
+		
 	
 	<!-- Handle JSF page expirations gracefully 
 	<error-page>

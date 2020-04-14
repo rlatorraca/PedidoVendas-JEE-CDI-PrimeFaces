@@ -44,7 +44,8 @@
 				<!-- outcome ==> para dever ir ao clicar -->
 				<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
 				<!-- Botao para SALVAR um novo produto -->
-				<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroClienteBean.salvar}" process="@this painel" update="clienteMensagem painel buttonEmailCliente enderecoAdicionadoTable" />				
+				<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroClienteBean.salvar}" process="@this painel" 
+					update="clienteMensagem painel buttonEmailCliente enderecoAdicionadoTable" disabled="#{not seguranca.salvarClientePermitido}" />				
 				
 			</p:toolbarGroup>
 			

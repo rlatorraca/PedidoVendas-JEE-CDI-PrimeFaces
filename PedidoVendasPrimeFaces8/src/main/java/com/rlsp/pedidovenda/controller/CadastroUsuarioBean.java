@@ -2,12 +2,13 @@ package com.rlsp.pedidovenda.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.rlsp.pedidovenda.model.Grupo;
 import com.rlsp.pedidovenda.model.Usuario;
@@ -71,8 +72,8 @@ public class CadastroUsuarioBean implements Serializable{
 	public void salvar() {
 		
 		usuario.setGrupos(gruposFiltrados);		
-		FacesUtil.addInfoMessage("Usuário salvo com sucesso!");
 		this.usuario = cadastroUsuarioService.salvar(this.usuario);
+		FacesUtil.addInfoMessage("Usuário salvo com sucesso!");
 		limpar();
 		
 		FacesUtil.addInfoMessage("Usuario salvo com sucesso!");

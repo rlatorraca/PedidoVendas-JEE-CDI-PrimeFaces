@@ -5,13 +5,18 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 	
+
+	<f:metadata>
+		<f:viewParam name="dummy"/>
+		<f:event listener="#{graficoPedidosCriadosBean.preRender}" type="preRenderView"/>
+	</f:metadata>
 	<!-- titulo pagina -->
 	<ui:define name="titulo">Dashboard</ui:define>
-	
+
 	<ui:define name="corpo">
-		<br/><br/><br/>
-			<h1>Seja Bem Vindo</h1>
-		<br/><br/><br/>
+		
+		<p:chart model="#{graficoPedidosCriadosBean.model}" type="line" style="height: 400px" />
+		
 	</ui:define>
 
 </ui:composition>

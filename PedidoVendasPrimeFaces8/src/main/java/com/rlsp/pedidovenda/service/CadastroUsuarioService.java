@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.rlsp.pedidovenda.model.Usuario;
 import com.rlsp.pedidovenda.repository.UsuariosRepository;
 import com.rlsp.pedidovenda.util.jpa.Transactional;
@@ -23,7 +25,9 @@ public class CadastroUsuarioService implements Serializable{
 		if( usuarioExistente != null && usuarioExistente.equals(usuario.getEmail())) {
 			throw new NegocioException("Email/Usuário já foi cadastrado.");
 		} 
-		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String result = encoder.encode(usuario.getSenha());
+		usuario.setSenha(result);
 		return usuarioRepository.salvarAlterar(usuario);
 	}
 	

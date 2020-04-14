@@ -34,7 +34,7 @@
 		
 		<div style="float : right; margin-right: 100px; margin-top : 20px">
 			<span style="float : left; height: 50px; line-height : 30px; margin-right: 70px; margin-top: 5px;">
-			Olá Usuario
+			Olá Usuario #{seguranca.nomeUsuario} !
 			</span>
 			<h:form style="display : inline-block">
 				<p:menubar>
@@ -50,7 +50,7 @@
 						<p:menuitem value="Novo Pedido" outcome="/pedidos/CadastroPedido"></p:menuitem>
 						<p:menuitem value="Pesquisa Pedido" outcome="/pedidos/PesquisaPedidos"></p:menuitem>
 					</p:submenu>
-					<p:menuitem value="Sair"></p:menuitem>
+					<p:menuitem value="Sair" url="/logout"/>
 				</p:menubar>
 			</h:form>
 		</div>

@@ -16,7 +16,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.rlsp.pedidovenda.filter.UsuarioFilter;
-import com.rlsp.pedidovenda.model.Grupo;
 import com.rlsp.pedidovenda.model.Usuario;
 import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.util.jpa.Transactional;
@@ -103,12 +102,15 @@ public class UsuariosRepository	implements Serializable{
 		
 		public Usuario porEmail(String email) {
 
+			Usuario usuario = null;
 			try {
-				return gerenciador.createQuery("from Usuario where upper(email) = :email", Usuario.class)
+				usuario =  gerenciador.createQuery("from Usuario where upper(email) = :email", Usuario.class)
 						.setParameter("email", email.toUpperCase()).getSingleResult();
 			} catch (NoResultException e) {
-				return null;
+				// nenhum usuario encontrado com o email
 			}
+			
+			return usuario;
 		}
 
 		
