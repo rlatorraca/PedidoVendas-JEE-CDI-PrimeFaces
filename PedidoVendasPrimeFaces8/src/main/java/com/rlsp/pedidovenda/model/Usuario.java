@@ -2,6 +2,7 @@ package com.rlsp.pedidovenda.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -38,6 +42,11 @@ public class Usuario implements Serializable {
 	@NotBlank @Size(max = 200)
 	@Column(name = "email_usuario", nullable = false, length = 200, unique = true)
 	private String email;
+
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	@Column(name ="data_criacao", nullable = false)
+	private Date dataCriacao;
 	
 	@NotBlank @Size(max = 300)
 	@Column(name = "senha_usuario", nullable = false, length = 300)
@@ -92,8 +101,14 @@ public class Usuario implements Serializable {
 	}
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
-	}
+	}	
 	
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

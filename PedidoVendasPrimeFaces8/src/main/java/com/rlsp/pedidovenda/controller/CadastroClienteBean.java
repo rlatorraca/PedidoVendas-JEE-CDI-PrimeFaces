@@ -95,7 +95,7 @@ public class CadastroClienteBean implements Serializable {
 		
 	public void salvar() {
 		if(!cliente.getEnderecos().isEmpty()) {
-			try {
+			try {				
 				clienteService.salvar(cliente);
 				this.cliente.isNovo();
 				limpar();

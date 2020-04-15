@@ -70,7 +70,7 @@
 	    	<p:confirmDialog id="confirmacaoExclusaoUsuarioDialog" header="Exclusão de usuário" widgetVar="confirmacaoExclusaoUsuario"
 	    	     message="Tem certeza que deseja excluir o usuario #{pesquisaUsuarioBean.usuarioSelecionado.nome} (#{pesquisaUsuarioBean.usuarioSelecionado.email})?" >
 	    		<p:button value="Não" onclick="PF('confirmacaoExclusaoUsuario').hide(); return false;" />
-	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusaoUsuario').hide();" action="#{pesquisaProdutosBean.excluir}" process="@this"
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusaoUsuario').hide();" action="#{pesquisaUsuariosBean.excluir}" process="@this"
 	    		 	update=":frmPesquisaUsuario:usuariosTable"/>
 	    	</p:confirmDialog>
 	    	

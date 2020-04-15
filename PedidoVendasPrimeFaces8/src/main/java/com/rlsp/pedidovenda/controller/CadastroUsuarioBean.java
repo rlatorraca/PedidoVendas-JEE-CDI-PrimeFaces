@@ -1,20 +1,23 @@
 package com.rlsp.pedidovenda.controller;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import com.rlsp.pedidovenda.model.Grupo;
 import com.rlsp.pedidovenda.model.Usuario;
 import com.rlsp.pedidovenda.repository.GruposRepository;
 import com.rlsp.pedidovenda.repository.UsuariosRepository;
 import com.rlsp.pedidovenda.service.CadastroUsuarioService;
+import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 
 @Named
@@ -70,8 +73,16 @@ public class CadastroUsuarioBean implements Serializable{
 	
 	
 	public void salvar() {
-		
-		usuario.setGrupos(gruposFiltrados);		
+			
+		usuario.setGrupos(gruposFiltrados);
+		DateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+		Date date = new Date();
+		try {
+			System.out.println(ft.parse(ft.format(date)));
+			usuario.setDataCriacao(ft.parse(ft.format(date)));
+		} catch (ParseException e) {
+			throw new NegocioException("Date Inexistente");
+		}
 		this.usuario = cadastroUsuarioService.salvar(this.usuario);
 		FacesUtil.addInfoMessage("Usuário salvo com sucesso!");
 		limpar();

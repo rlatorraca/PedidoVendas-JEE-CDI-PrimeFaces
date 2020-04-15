@@ -184,7 +184,12 @@
 		    <version>5.3.1.RELEASE</version>
 		</dependency>
 		
-		
+		<!-- Joda-Time provides a quality replacement for the Java date and time classes. -->
+		<dependency>
+  			<groupId>joda-time</groupId>
+  			<artifactId>joda-time</artifactId>
+  			<version>2.10.5</version>
+		</dependency>
 
   	
   </dependencies>
