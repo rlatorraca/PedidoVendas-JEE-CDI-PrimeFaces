@@ -1,0 +1,36 @@
+ <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Relatório de produto no estoque</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form id="frm">
+	    	<h1>Relatório de pedidos emitidos</h1>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Emitir" action="#{relatorioProdutosEstoqueBean.emitir}"
+	    				ajax="false" update="@form"/>
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+	    			columnClasses="rotulo, campo">
+	    		<p:outputLabel value="Entre os valores" />
+	    		<h:panelGroup>
+		    		<p:inputText value="#{relatorioProdutosEstoqueBean.valorInicio}" label="Valor Inicial($)" size="10" />
+		    		<p:spacer width="10" />
+		    		<h:outputText value="a" />
+		    		<p:spacer width="10" />
+		    		<p:inputText value="#{relatorioProdutosEstoqueBean.valorFim}" label="Valor Final($)" size="10" />
+		    	</h:panelGroup>
+	    	</p:panelGrid>
+    	</h:form>
+    </ui:define>
+</ui:composition>

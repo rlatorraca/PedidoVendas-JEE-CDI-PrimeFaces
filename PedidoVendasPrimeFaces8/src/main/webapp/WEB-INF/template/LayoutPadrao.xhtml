@@ -50,6 +50,10 @@
 						<p:menuitem value="Novo Pedido" outcome="/pedidos/CadastroPedido"></p:menuitem>
 						<p:menuitem value="Pesquisa Pedido" outcome="/pedidos/PesquisaPedidos"></p:menuitem>
 					</p:submenu>
+					<p:submenu label="Relatórios">
+							<p:menuitem value="Pedidos emitidos" outcome="/reports/relatoriosPedidosEmitidos" />
+							<p:menuitem value="Produto x Estoque" outcome="/reports/relatoriosProdutosEstoque" />								
+					</p:submenu>
 					<p:menuitem value="Sair" url="/logout"/>
 				</p:menubar>
 			</h:form>

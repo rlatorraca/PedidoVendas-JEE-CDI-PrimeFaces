@@ -12,6 +12,7 @@
   
   <properties>
     	<project.build.sourceEnconding>UTF-8</project.build.sourceEnconding>  	
+    	<itext.version>RELEASE</itext.version>
   </properties>
   
   <dependencies>
@@ -190,8 +191,29 @@
   			<artifactId>joda-time</artifactId>
   			<version>2.10.5</version>
 		</dependency>
+		
+		<!-- Jasper Report -->
+		<!-- https://community.jaspersoft.com/project/jaspersoft-studio/releases -->
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports</artifactId>
+		    <version>6.12.2</version>
+  		</dependency>
+		
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports-fonts</artifactId>
+		    <version>6.12.2</version>
+		</dependency>
+    
+	    <dependency>
+		  <groupId>com.lowagie</groupId>
+		  <artifactId>itext</artifactId>
+		  <version>2.1.7</version>
+		  <scope>compile</scope>
+		</dependency>
 
-  	
+		  	
   </dependencies>
   
   <repositories>
@@ -201,12 +223,21 @@
             <url>http://repository.primefaces.org</url>
             <layout>default</layout>
         </repository>
+  		
   		<repository>
 			<id>clearfly-releases</id>
 			<name>Clearfly Releases Maven Repository</name>
 			<url>https://mvn.clearfly.net/artifactory/libs-release</url>
 			<layout>default</layout>
 		</repository>
+		
+		<repository>
+		    <id>jasper-3rd-party</id>
+		    <name>Jasper3rdParty</name>
+		    <url>http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
+  		</repository>
+
+
   </repositories>
   
   <build>
