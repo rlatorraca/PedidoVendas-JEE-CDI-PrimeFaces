@@ -10,6 +10,8 @@ import javax.validation.OverridesAttribute;
 import javax.validation.Payload;
 import javax.validation.constraints.Pattern;
 
+import org.primefaces.validate.bean.ClientConstraint;
+
 /**
  * 
  * @interface SKU ==> ANOTACAO customizada que pode ser usada em todo o Codigo JAVA
@@ -34,6 +36,7 @@ import javax.validation.constraints.Pattern;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {})
 @Pattern(regexp = "([a-zA-Z]{3}\\d{4,18})?")
+@ClientConstraint(resolvedBy = SkuClientValidationConstraint.class) // Configura a validacao no BeanValidation
 public @interface SKU {
 
 	/**

@@ -52,11 +52,11 @@
 	<param-value>true</param-value>
   </context-param>
 
-  <!-- Usa a SUBMISSAO PARCIAL das partes AJAX do formulario 
+  <!-- Usa a SUBMISSAO PARCIAL das partes AJAX do formulario --> 
 	<context-param>
 		<param-name>primefaces.SUBMIT</param-name>
 		<param-value>partial</param-value>
-	</context-param> -->
+	</context-param>
 	
 		
 	

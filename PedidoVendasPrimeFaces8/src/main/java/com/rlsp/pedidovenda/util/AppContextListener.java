@@ -3,6 +3,10 @@ package com.rlsp.pedidovenda.util;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import javax.validation.constraints.NotBlank;
+
+import org.primefaces.validate.bean.BeanValidationMetadataMapper;
+import org.primefaces.validate.bean.NotBlankClientValidationConstraint;
 
 
 /**
@@ -24,12 +28,17 @@ public class AppContextListener implements ServletContextListener {
 	}
 
 	/**
-	 * Quando feito o DEPLOY da aplicacao (for pegoo Context) esse metodos sera chamado
+	 * Quando feito o DEPLOY da aplicacao (for pegooContext) esse metodos sera chamado
 	 */
 	
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		System.setProperty("org.apache.el.parser.COERCE_TO_ZERO", "false"); //Nao Precisa fazer a CONVERSAO PARA ZERO
+		
+		/**
+		 * Registrar/Conecta a validacao "Client Side" de 3ºs (no caso NotBlank do pacote "javax.validation.constraints.NotBlank.message"
+		 */
+		BeanValidationMetadataMapper.registerConstraintMapping(NotBlank.class, new NotBlankClientValidationConstraint()); 
 	}
 
 	

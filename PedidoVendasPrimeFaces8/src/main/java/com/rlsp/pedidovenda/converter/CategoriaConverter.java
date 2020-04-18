@@ -1,9 +1,13 @@
 package com.rlsp.pedidovenda.converter;
 
+import java.util.Map;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+
+import org.primefaces.convert.ClientConverter;
 
 import com.rlsp.pedidovenda.model.Categoria;
 import com.rlsp.pedidovenda.repository.CategoriasRepository;
@@ -15,7 +19,7 @@ import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
  *  - forClass = Categoria.class ==> para a Entidade Categoria
  */
 @FacesConverter(forClass = Categoria.class)
-public class CategoriaConverter implements Converter<Object> {
+public class CategoriaConverter implements Converter<Object> , ClientConverter{
 
 	/**
 	 * IMPORTANTE
@@ -57,4 +61,17 @@ public class CategoriaConverter implements Converter<Object> {
 		return "";
 	}
 
+	/**
+	 * Serve para converter os dados de "" para "null" para validar "Client side" apra Categorias
+	 */
+	@Override
+	public String getConverterId() {
+		
+		return "com.rlsp.Categoria";
+	}
+
+	@Override
+	public Map<String, Object> getMetadata() {
+		return null;
+	}
 }

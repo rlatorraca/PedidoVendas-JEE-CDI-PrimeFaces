@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 	
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><ui:insert name="titulo">RLSP - Sistema de Vendas</ui:insert></title>
 	<h:outputStylesheet library="css" name="sistema.css"></h:outputStylesheet>
 	 <h:outputScript library="js" name="jquery.maskMoney.js"/>
+	 <h:outputScript library="js" name="validadores.js"/>
 </h:head>
 
 <h:body>
@@ -37,7 +38,7 @@
 			Olá Usuario #{seguranca.nomeUsuario} !
 			</span>
 			<h:form style="display : inline-block">
-				<p:menubar>
+				<p:menubar styleClass="menu-sistema" >
 					<p:submenu label="Cadastros">
 						<p:menuitem value="Clientes" outcome="/clientes/CadastroCliente"/>
 						<p:menuitem value="Usuários" outcome="/usuarios/CadastroUsuario"/>
@@ -54,7 +55,8 @@
 							<p:menuitem value="Pedidos emitidos" outcome="/reports/relatoriosPedidosEmitidos" />
 							<p:menuitem value="Produto x Estoque" outcome="/reports/relatoriosProdutosEstoque" />								
 					</p:submenu>
-					<p:menuitem value="Sair" url="/logout"/>
+					<p:menuitem value="Sair" url="#{request.contextPath}/logout" />
+					
 				</p:menubar>
 			</h:form>
 		</div>

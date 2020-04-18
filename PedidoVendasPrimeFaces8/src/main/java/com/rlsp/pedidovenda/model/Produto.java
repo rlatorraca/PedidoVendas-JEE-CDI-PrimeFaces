@@ -35,13 +35,16 @@ public class Produto implements Serializable {
 	@Column(name = "nome_produto", nullable = false, length = 120)
 	private String nome;
 	
-	@NotBlank  @SKU
+	@NotBlank(message = "Por favor, informe o SKU")
+	@SKU(message = "Por favor, informe um SKU no formato XX9999")	
 	@Column(name = "sku_produto", length = 21, nullable = false, unique = true)
 	private String sku;
+	
 	
 	@NotNull(message = "é obrigatório")
 	@Column(name = "valor_unitario_produto", nullable = false, precision=12, scale=2)	
 	private BigDecimal valorUnitario;
+	
 	
 	@NotNull @Min(value=0, message="Apenas valores positivos") @Max(value=9999, message= "Não pode ser maior que 9.999 unidades")
 	@Column(name = "quantidade_estoque_produto", nullable = false)

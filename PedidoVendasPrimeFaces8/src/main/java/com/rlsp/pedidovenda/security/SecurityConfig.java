@@ -77,15 +77,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.loginPage("/Login.xhtml")					// Pagina de Login
 			.failureUrl("/Login.xhtml?invalid=true")	// URL em caso de falha no login
 			.and()
-		
-		.logout()
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // Serve para Deslogar do sisema
-			.and()
-		
+				
 		.exceptionHandling()
 			.accessDeniedPage("/AcessoNegado.xhtml")	// em caso do acesso NEGADO
 			.authenticationEntryPoint(jsfLoginEntry)	//
-			.accessDeniedHandler(jsfDeniedEntry);		//
+			.accessDeniedHandler(jsfDeniedEntry).and()		//
+		.logout()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.deleteCookies("JSESSIONID")
+		    .invalidateHttpSession(true)
+			.logoutSuccessUrl("/Login.xhtml") // Serve para Deslogar do sisema
+		.permitAll();
 		
 		System.out.println("Fim configure(HttpSecurity http)");
 		
