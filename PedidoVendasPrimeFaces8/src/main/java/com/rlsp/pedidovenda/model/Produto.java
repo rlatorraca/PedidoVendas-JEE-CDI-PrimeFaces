@@ -41,7 +41,7 @@ public class Produto implements Serializable {
 	private String sku;
 	
 	
-	@NotNull(message = "é obrigatório")
+	@NotNull(message = "Valor unitário é obrigatório")
 	@Column(name = "valor_unitario_produto", nullable = false, precision=12, scale=2)	
 	private BigDecimal valorUnitario;
 	

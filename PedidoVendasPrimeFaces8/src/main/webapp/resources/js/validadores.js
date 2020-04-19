@@ -1,8 +1,26 @@
 PrimeFaces.locales['pt_BR'] = {
 		messages : {
-			'org.hibernate.validator.constraints.NotBlank.message' : '{0} : não pode estar em branco'
+			'org.hibernate.validator.constraints.NotBlank.message' : '{0} : não pode estar em branco',
+			'javax.validation.constraints.NotNull.message' : '{0} : não pode ser nulo'
 		}
 }
+
+PrimeFaces.validator.NotNull = {
+
+		MESSAGE_ID : "javax.validation.constraints.NotNull.message",
+
+		validate : function(element, d) {
+			var label = element.data('p-label');
+			if (d === null || d === undefined) {
+				var b = PrimeFaces.util.ValidationContext, a = element.data("p-notnull-msg"), e = (a) ? {
+					summary : a,
+					detail : a
+				} : b.getMessage(this.MESSAGE_ID, label);
+				throw e
+			}
+		}
+	};
+
 
 PrimeFaces.validator.NotBlank = {
 		

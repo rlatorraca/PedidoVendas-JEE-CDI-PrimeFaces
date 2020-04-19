@@ -9,6 +9,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
+
 import com.rlsp.pedidovenda.model.Cliente;
 import com.rlsp.pedidovenda.model.Endereco;
 import com.rlsp.pedidovenda.model.TipoPessoa;

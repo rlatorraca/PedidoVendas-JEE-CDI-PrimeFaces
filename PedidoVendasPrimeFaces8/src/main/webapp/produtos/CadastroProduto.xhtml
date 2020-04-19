@@ -71,7 +71,7 @@
     		
     		<p:outputLabel value="Valor unitário" for="valorUnitario"/>
     		<p:inputText id="valorUnitario" size="14" maxlength="14" styleClass="moeda" value="#{cadastroProdutoBean.produto.valorUnitario}">
-    			<f:convertNumber maxFractionDigits="2" minFractionDigits="2"  />
+    			<f:convertNumber type="currency" maxFractionDigits="2" minFractionDigits="2"  />
     		</p:inputText>
     		
     		<p:outputLabel value="Estoque" for="estoque"/>

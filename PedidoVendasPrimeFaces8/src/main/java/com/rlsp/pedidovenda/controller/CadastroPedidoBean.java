@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.event.SelectEvent;
 
 import com.rlsp.pedidovenda.events.cdi.PedidoAlteradoEvent;
 import com.rlsp.pedidovenda.model.Cliente;
@@ -106,6 +107,15 @@ public class CadastroPedidoBean implements Serializable {
 			pedido.recularValorTotalPedido();
 		}	
 	}
+	
+	
+	/**
+	 * Usado para colocao o Cliente solecionado na tela de pedidos, apos o fechament oda caisa de dialogo  
+	 */
+	public void clienteSelecionado(@SuppressWarnings("rawtypes") SelectEvent event) {
+		pedido.setCliente((Cliente) event.getObject());
+	}
+
 	
 	/**
 	 * Usado no autocomplete para procurar o produto no DB

@@ -58,7 +58,7 @@ public class LoginBean implements Serializable {
 	}
 	
 	public String getEmail() {
-		System.out.println("Email em LoginBean : " + email);
+		
 		return email;
 	}
 
