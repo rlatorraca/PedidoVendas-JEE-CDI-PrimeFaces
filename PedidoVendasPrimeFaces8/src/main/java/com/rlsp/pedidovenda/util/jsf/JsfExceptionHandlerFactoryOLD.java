@@ -3,19 +3,19 @@ package com.rlsp.pedidovenda.util.jsf;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerFactory;
 
-public class JsfExceptionHandlerFactory extends ExceptionHandlerFactory {
+public class JsfExceptionHandlerFactoryOLD extends ExceptionHandlerFactory {
 
 	private ExceptionHandlerFactory parent;
 	
 	
 	@SuppressWarnings("deprecation")
-	public JsfExceptionHandlerFactory(ExceptionHandlerFactory parent) {
+	public JsfExceptionHandlerFactoryOLD(ExceptionHandlerFactory parent) {
 		this.parent = parent;
 	}
 	
 	@Override
 	public ExceptionHandler getExceptionHandler() {
-		return new JsfExceptionHandler(parent.getExceptionHandler());
+		return new JsfExceptionHandlerOLD(parent.getExceptionHandler());
 	}
 	
 }

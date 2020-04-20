@@ -8,6 +8,8 @@
     <ui:define name="titulo">Pesquisa produtos</ui:define>
     
     <ui:define name="corpo">
+    
+    	<p:focus/>
     	<h:form id="frmPesquisaProduto">
 	    	<h1>Pesquisa Produtos</h1>
 	    	
@@ -49,7 +51,9 @@
 	    			<h:outputText value="#{produto.categoria.descricao}"/>
 	    		</p:column>
 	    		<p:column headerText="Valor unitário" style="text-align: center; width: 100px">
-	    			<h:outputText value="#{produto.valorUnitario}" />
+	    			<h:outputText value="#{produto.valorUnitario}" >
+	    				<f:convertNumber type="currency"/>
+	    			</h:outputText>
 	    		</p:column>
 	    		<p:column headerText="Estoque" style="text-align: center; width: 100px">
 	    			<h:outputText value="#{produto.quantidadeEstoque}" />

@@ -12,6 +12,7 @@ import com.rlsp.pedidovenda.filter.ClienteFilter;
 import com.rlsp.pedidovenda.model.Cliente;
 import com.rlsp.pedidovenda.model.TipoPessoa;
 import com.rlsp.pedidovenda.repository.ClientesRepository;
+import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 
 
@@ -52,11 +53,16 @@ public class PesquisaClientesBean implements Serializable {
 
 	}
 	
-	public void excluir() {
-		clienteRepository.remover(clienteSelecionado);
-		clientesFiltrados.remove(clienteSelecionado);
-		
-		FacesUtil.addInfoMessage("O cliente '" + clienteSelecionado.getNome()+ "' (" + clienteSelecionado.getEmail() + ") foi excluído com sucesso!");		
+	public void excluir()  {
+		try {
+			clienteRepository.remover(clienteSelecionado);
+			clientesFiltrados.remove(clienteSelecionado);
+			
+			FacesUtil.addInfoMessage("O cliente '" + clienteSelecionado.getNome()+ "' (" + clienteSelecionado.getEmail() + ") foi excluído com sucesso!");	
+		} catch (NegocioException ne) {
+			FacesUtil.addErrorMessage(ne.getMessage());
+		} 
+			
 		
 		
 	}

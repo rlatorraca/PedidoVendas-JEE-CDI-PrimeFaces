@@ -96,7 +96,7 @@ public class ProdutosRepository  implements Serializable{
 	}
 
 	@Transactional
-	public void remover(Produto produto) {
+	public void remover(Produto produto) throws NegocioException{
 		try {
 			produto = porId(produto.getId());
 			gerenciador.remove(produto);

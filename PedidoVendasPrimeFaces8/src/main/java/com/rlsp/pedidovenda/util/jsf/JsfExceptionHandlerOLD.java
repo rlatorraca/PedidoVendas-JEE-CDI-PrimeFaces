@@ -19,16 +19,16 @@ import com.rlsp.pedidovenda.service.NegocioException;
 
 
 
-public class JsfExceptionHandler extends ExceptionHandlerWrapper{
+public class JsfExceptionHandlerOLD extends ExceptionHandlerWrapper{
 
-	private static Log log = LogFactory.getLog(JsfExceptionHandler.class);
+	private static Log log = LogFactory.getLog(JsfExceptionHandlerOLD.class);
 	/**
 	 * Para o usar ExcpectionHanderdo JSF
 	 */
     private ExceptionHandler wrapped;
 
     @SuppressWarnings("deprecation")
-	public JsfExceptionHandler(ExceptionHandler wrapped) {
+	public JsfExceptionHandlerOLD(ExceptionHandler wrapped) {
 		this.wrapped = wrapped;
 	}
 

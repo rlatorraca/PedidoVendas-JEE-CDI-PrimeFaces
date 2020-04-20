@@ -12,6 +12,7 @@ import com.rlsp.pedidovenda.filter.UsuarioFilter;
 import com.rlsp.pedidovenda.model.Produto;
 import com.rlsp.pedidovenda.model.Usuario;
 import com.rlsp.pedidovenda.repository.UsuariosRepository;
+import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 
 @Named
@@ -45,10 +46,15 @@ public class PesquisaUsuariosBean implements Serializable {
 	}
 	
 	public void excluir() {
+	
+		try {
 		usuarioRepository.remover(usuarioSelecionado);
 		usuariosFiltrados.remove(usuarioSelecionado);
 		
 		FacesUtil.addInfoMessage("Usuário " + usuarioSelecionado.getNome() + " (" + usuarioSelecionado.getEmail() + ") foi excluído com sucesso!");
+		}catch (NegocioException ne) {
+			FacesUtil.addErrorMessage(ne.getMessage());
+		} 
 	}
 
 	public List<Usuario> getUsuariosFiltrados() {

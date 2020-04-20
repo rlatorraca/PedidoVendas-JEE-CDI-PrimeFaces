@@ -24,6 +24,7 @@ import com.rlsp.pedidovenda.repository.ClientesRepository;
 import com.rlsp.pedidovenda.repository.ProdutosRepository;
 import com.rlsp.pedidovenda.repository.UsuariosRepository;
 import com.rlsp.pedidovenda.service.CadastroPedidoService;
+import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 import com.rlsp.pedidovenda.validation.SKU;
 
@@ -82,6 +83,8 @@ public class CadastroPedidoBean implements Serializable {
 		try {
 			this.pedido = this.cadastroPedidoService.salvar(this.pedido);
 			FacesUtil.addInfoMessage("Pedido salvo com sucesso!");
+		} catch (NegocioException ne) {
+			FacesUtil.addErrorMessage(ne.getMessage());
 		} finally {
 			this.pedido.adicionarItemVazio(); // ReAdiciona a 1º linda apos SALVAR, ou se houver ERRO
 		}

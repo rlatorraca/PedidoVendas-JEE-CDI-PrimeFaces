@@ -1,6 +1,6 @@
 package com.rlsp.pedidovenda.service;
 
-public class NegocioException extends RuntimeException {
+public class NegocioException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 

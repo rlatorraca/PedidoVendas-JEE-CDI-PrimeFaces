@@ -14,6 +14,7 @@ import com.rlsp.pedidovenda.model.Categoria;
 import com.rlsp.pedidovenda.model.Produto;
 import com.rlsp.pedidovenda.repository.CategoriasRepository;
 import com.rlsp.pedidovenda.service.CadastroProdutoService;
+import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 
 @Named
@@ -75,11 +76,19 @@ public class CadastroProdutoBean implements Serializable {
 		subcategorias = new ArrayList<>();
 	}
 	
-	public void salvar() {
-		this.produto = cadastroProdutoService.salvar(this.produto);
-		limpar();
+	public void salvar() throws NegocioException {
+	
+		try {
+			this.produto = cadastroProdutoService.salvar(this.produto);
+			limpar();
+			
+			FacesUtil.addInfoMessage("Produto salvo com sucesso!");
+		} catch (NegocioException ne) {
+			FacesUtil.addErrorMessage(ne.getMessage());
+		}  
 		
-		FacesUtil.addInfoMessage("Produto salvo com sucesso!");
+		
+
 	}
 	
 	public boolean isEditando() {

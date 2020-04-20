@@ -95,17 +95,13 @@ public class CadastroClienteBean implements Serializable {
 	}
 	
 		
-	public void salvar() {
+	public void salvar() throws NegocioException {
 		if(!cliente.getEnderecos().isEmpty()) {
-			try {				
-				clienteService.salvar(cliente);
-				this.cliente.isNovo();
-				limpar();
+			clienteService.salvar(cliente);
+			this.cliente.isNovo();
+			limpar();
 
-				FacesUtil.addInfoMessage("Cliente salvo com sucesso!");
-			} catch (NegocioException e) {
-				FacesUtil.addErrorMessage(e.getMessage());
-			}
+			FacesUtil.addInfoMessage("Cliente salvo com sucesso!");
 		
 		} else {
 			FacesUtil.addErrorMessage("Endereço não cadastrado");

@@ -10,6 +10,8 @@
 	
 	<ui:define name="corpo">
 	<h:form id="frm"  onkeypress="if (event.keyCode == 13) {event.preventDefault()}">
+		<p:focus context="frm"/>
+	
 		<f:metadata>
 		 	<!-- <o:viewParam name="produto" value="#{cadastroProdutoBean.produto}"/>  -->
 		 	<f:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}"/>

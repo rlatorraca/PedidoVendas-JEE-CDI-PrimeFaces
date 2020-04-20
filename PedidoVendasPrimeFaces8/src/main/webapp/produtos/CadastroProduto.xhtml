@@ -17,8 +17,12 @@
     	<f:event listener="#{cadastroProdutoBean.inicializar}" type="preRenderView" />
      </f:metadata>
 	
-	 <h:form>
+	
+	
+	<h:form>
 	 
+	 	<p:focus/>
+	 	
 		<h1>#{cadastroProdutoBean.editando ? "Editar Produto" : "Novo Produto"}</h1>
 		
 		<p:messages closable="true">
@@ -71,7 +75,7 @@
     		
     		<p:outputLabel value="Valor unitário" for="valorUnitario"/>
     		<p:inputText id="valorUnitario" size="14" maxlength="14" styleClass="moeda" value="#{cadastroProdutoBean.produto.valorUnitario}">
-    			<f:convertNumber type="currency" maxFractionDigits="2" minFractionDigits="2"  />
+    			<f:convertNumber  maxFractionDigits="2" minFractionDigits="2" locale="pt_BR"/>
     		</p:inputText>
     		
     		<p:outputLabel value="Estoque" for="estoque"/>

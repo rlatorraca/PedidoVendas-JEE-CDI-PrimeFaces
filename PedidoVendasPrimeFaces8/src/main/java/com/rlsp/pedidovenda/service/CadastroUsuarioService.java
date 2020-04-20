@@ -19,7 +19,7 @@ public class CadastroUsuarioService implements Serializable{
 	
 	@SuppressWarnings("unlikely-arg-type")
 	@Transactional
-	public Usuario salvar(Usuario usuario) {
+	public Usuario salvar(Usuario usuario) throws NegocioException{
 		Usuario usuarioExistente = usuarioRepository.produtoPorEmail(usuario.getEmail());
 		
 		if( usuarioExistente != null && usuarioExistente.equals(usuario.getEmail())) {

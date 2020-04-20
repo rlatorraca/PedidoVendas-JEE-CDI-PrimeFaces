@@ -72,7 +72,7 @@ public class CadastroUsuarioBean implements Serializable{
 	}
 	
 	
-	public void salvar() {
+	public void salvar() throws NegocioException {
 			
 		usuario.setGrupos(gruposFiltrados);
 		DateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");

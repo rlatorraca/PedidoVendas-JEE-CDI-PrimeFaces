@@ -212,8 +212,21 @@
 		  <version>2.1.7</version>
 		  <scope>compile</scope>
 		</dependency>
-
-		  	
+		
+		<!-- Para gerar arquivo XLS (Excel)  -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>4.1.2</version>
+		</dependency>
+		
+		<!-- Para gerar arquivo PDF (PDF)  -->
+		<dependency>
+    		<groupId>com.itextpdf</groupId>
+    		<artifactId>itextpdf</artifactId>
+    		<version>5.5.13.1</version>
+		</dependency>
+  	
   </dependencies>
   
   <repositories>

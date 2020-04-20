@@ -56,7 +56,7 @@ public class Produto implements Serializable {
 	private Categoria categoria;
 
 	
-	public void baixarEstoque(Integer quantidade) {
+	public void baixarEstoque(Integer quantidade) throws NegocioException {
 		int novaQuantidade = this.getQuantidadeEstoque() - quantidade;
 		
 		if (novaQuantidade < 0) {

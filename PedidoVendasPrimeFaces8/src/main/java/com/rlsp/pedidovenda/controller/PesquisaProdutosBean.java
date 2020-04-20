@@ -12,6 +12,7 @@ import javax.inject.Named;
 import com.rlsp.pedidovenda.filter.ProdutoFilter;
 import com.rlsp.pedidovenda.model.Produto;
 import com.rlsp.pedidovenda.repository.ProdutosRepository;
+import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 
 @Named
@@ -38,12 +39,17 @@ public class PesquisaProdutosBean implements Serializable {
 	}
 	
 	public void excluir() {
-		produtoRepository.remover(produtoSelecionado); //Chamda o Repository para excluir o Produto Selecionado
 		
-		produtosFiltrados.remove(produtoSelecionado); //Exclui da tela o objeto exlcuido
+		try {
+			produtoRepository.remover(produtoSelecionado); //Chamda o Repository para excluir o Produto Selecionado
 		
-		FacesUtil.addInfoMessage("Produto " + produtoSelecionado.getSku() 
-				+ " excluído com sucesso.");
+			produtosFiltrados.remove(produtoSelecionado); //Exclui da tela o objeto exlcuido
+		
+			FacesUtil.addInfoMessage("Produto " + produtoSelecionado.getSku()+ " excluído com sucesso.");
+		}catch (NegocioException ne) {
+			FacesUtil.addErrorMessage(ne.getMessage());
+		} 	
+		
 	}
 
 	public PesquisaProdutosBean() {

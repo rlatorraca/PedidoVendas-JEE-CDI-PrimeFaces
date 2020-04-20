@@ -7,6 +7,9 @@
     
    <application>
    
+   		<!-- Exception Handler do PrimeFaces -->
+   		<el-resolver>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerELResolver</el-resolver>	
+   
    		<action-listener>org.primefaces.application.DialogActionListener</action-listener>
         <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
         <view-handler>org.primefaces.application.DialogViewHandler</view-handler>
@@ -18,11 +21,17 @@
 		</locale-config>
 	</application>
     
-   <factory>
+   <!-- <factory>
 		<exception-handler-factory>
 			com.rlsp.pedidovenda.util.jsf.JsfExceptionHandlerFactory
 		</exception-handler-factory>
-	</factory>  
+	</factory> -->  
+	
+	<factory>
+	    <exception-handler-factory>
+	        org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory
+	    </exception-handler-factory>
+	</factory>
 
     
 </faces-config>

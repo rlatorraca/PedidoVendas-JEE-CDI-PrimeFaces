@@ -15,12 +15,11 @@ public class CadastroProdutoService implements Serializable{
 	@Inject
 	private ProdutosRepository produtoRepository;
 	
-	@SuppressWarnings("unlikely-arg-type")
 	@Transactional
-	public Produto salvar(Produto produto) {
+	public Produto salvar(Produto produto) throws NegocioException {
 		Produto produtoExistente = produtoRepository.produtoPorSKU(produto.getSku());
 		
-		if( produtoExistente != null && produtoExistente.equals(produto.getSku())) {
+		if( produtoExistente != null && produtoExistente.getSku().equals(produto.getSku())) {
 			throw new NegocioException("SKU/Produto já foi cadastrado.");
 		} 
 		

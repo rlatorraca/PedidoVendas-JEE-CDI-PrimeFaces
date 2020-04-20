@@ -18,7 +18,7 @@ public class CadastroClienteService implements Serializable{
 	
 	@SuppressWarnings("unlikely-arg-type")
 	@Transactional
-	public Cliente salvar(Cliente cliente) {
+	public Cliente salvar(Cliente cliente) throws NegocioException {
 		Cliente clienteExistente = clienteRepository.produtoPorCPForCNPJ(cliente.getDocumentoReceitaFederal());
 		
 		if( clienteExistente != null && clienteExistente.equals(cliente.getDocumentoReceitaFederal())) {

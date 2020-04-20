@@ -10,6 +10,7 @@ import javax.inject.Named;
 import com.rlsp.pedidovenda.events.cdi.PedidoAlteradoEvent;
 import com.rlsp.pedidovenda.model.Pedido;
 import com.rlsp.pedidovenda.service.CancelarPedidoService;
+import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 
 
@@ -31,10 +32,15 @@ public class CancelarPedidoBean implements Serializable {
 	private Pedido pedido;
 	
 	public void cancelarPedido() {
-		this.pedido = this.cancelamentoPedidoService.cancelar(this.pedido);
-		this.pedidoAlteradoEvent.fire(new PedidoAlteradoEvent(this.pedido));
+		try {
+			this.pedido = this.cancelamentoPedidoService.cancelar(this.pedido);
+			this.pedidoAlteradoEvent.fire(new PedidoAlteradoEvent(this.pedido));
+			
+			FacesUtil.addInfoMessage("Pedido cancelado com sucesso!");
+		} catch (NegocioException ne) {
+			FacesUtil.addErrorMessage(ne.getMessage());
+		}
 		
-		FacesUtil.addInfoMessage("Pedido cancelado com sucesso!");
 	}
 	
 }

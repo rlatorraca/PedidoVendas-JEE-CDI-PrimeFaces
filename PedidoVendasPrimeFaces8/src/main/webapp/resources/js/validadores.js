@@ -69,7 +69,7 @@ PrimeFaces.validator.SKU = {
 			}
 		}
 			
-	}
+}
 
 
 PrimeFaces.converter['com.rlsp.Categoria'] = {
@@ -82,4 +82,76 @@ PrimeFaces.converter['com.rlsp.Categoria'] = {
 			return parseInt(value);
 		}
 			
-	};
+};
+
+
+PrimeFaces.converter['com.rlsp.Produto'] = {
+		
+		convert : function(element, value) {
+			if (value === null || value === '') {
+				return null;
+			}
+			
+			return parseInt(value);
+		}
+			
+};
+
+
+PrimeFaces.converter['javax.faces.Number']  = {
+	CURRENCY_ID : "javax.faces.converter.NumberConverter.CURRENCY",
+	NUMBER_ID : "javax.faces.converter.NumberConverter.NUMBER",
+	PATTERN_ID : "javax.faces.converter.NumberConverter.PATTERN",
+	PERCENT_ID : "javax.faces.converter.NumberConverter.PERCENT",
+	REGEX : /^[-+]?\d+(\.\d+)?(\,\d+)?[d]?$/,
+	convert : function(d, e) {
+		if (e === null) {
+			return null
+		}
+		if ($.trim(e).length === 0) {
+			return null
+		}
+		var g = PrimeFaces.util.ValidationContext, k = g
+				.getLocaleSettings(), j = d.data("p-notype"), l = d
+				.data("p-maxint"), i = d.data("p-minfrac"), c = d
+				.data("p-intonly");
+		if (j === "currency") {
+			var f = d.data("p-curs");
+			if (f) {
+				if (e.indexOf(f) === -1) {
+					throw g.getMessage(this.CURRENCY_ID, e, f + "100",
+							g.getLabel(d))
+				} else {
+					e = e.substring(f.length)
+				}
+			}
+		} else {
+			if (j === "percent") {
+				if (e.lastIndexOf("%") !== (e.length - 1)) {
+					throw g.getMessage(this.PERCENT_ID, e, "50%", g
+							.getLabel(d))
+				} else {
+					e = e.replace(/%/g, "")
+				}
+			}
+		}
+		
+		if (!this.REGEX.test(e)) {
+			throw g.getMessage(this.NUMBER_ID, e, 50, g.getLabel(d))
+		}
+		var h = e.split(k.decimalSeparator), b = h[0].replace(
+				new RegExp(k.groupingSeparator, "g"), ""), a = h[1];
+		if (l && b.length > l) {
+			b = b.substring(b.length - l)
+		}
+		if (a && i && a.length > i) {
+			a = a.substring(0, i)
+		}
+		if (c) {
+			return parseInt(b)
+		} else {
+			return parseInt(b) + parseFloat("." + a)
+		}
+	}
+}
+

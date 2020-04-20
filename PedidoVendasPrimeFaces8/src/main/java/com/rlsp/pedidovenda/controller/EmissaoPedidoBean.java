@@ -11,6 +11,7 @@ import javax.inject.Named;
 import com.rlsp.pedidovenda.events.cdi.PedidoAlteradoEvent;
 import com.rlsp.pedidovenda.model.Pedido;
 import com.rlsp.pedidovenda.service.EmissaoPedidoService;
+import com.rlsp.pedidovenda.service.NegocioException;
 import com.rlsp.pedidovenda.util.jsf.FacesUtil;
 
 @Named
@@ -52,6 +53,8 @@ public class EmissaoPedidoBean implements Serializable {
 			this.pedidoAlteradoEvent.fire(new PedidoAlteradoEvent(this.pedido));
 			
 			FacesUtil.addInfoMessage("Pedido emitido com sucesso!");
+		} catch (NegocioException ne) {
+			FacesUtil.addErrorMessage(ne.getMessage());
 		} finally {
 			this.pedido.adicionarItemVazio(); // Adiciona a linha de inclusao de itens de volta a tela
 		}
