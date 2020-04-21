@@ -16,7 +16,7 @@
 			</p:inputText>
 		</p:column>
 		
-		<p:column headerText="Produto">
+		<p:column headerText="Produto" style="width: 95%">
 			<h:outputText value="#{item.produto.nome}" rendered="#{item.produtoAssociado}" />
 		
 			<p:autoComplete styleClass="produto-tabela" value="#{cadastroPedidoBean.produtoLinhaEditavel}"

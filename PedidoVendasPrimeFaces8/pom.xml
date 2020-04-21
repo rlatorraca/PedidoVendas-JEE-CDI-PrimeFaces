@@ -226,6 +226,13 @@
     		<artifactId>itextpdf</artifactId>
     		<version>5.5.13.1</version>
 		</dependency>
+		
+		<!-- Themes (layouts) - PrimeFaces -->
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
   	
   </dependencies>
   

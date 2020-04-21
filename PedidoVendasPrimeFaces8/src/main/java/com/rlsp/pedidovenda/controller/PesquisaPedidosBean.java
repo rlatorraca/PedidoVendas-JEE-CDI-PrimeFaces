@@ -1,8 +1,9 @@
 package com.rlsp.pedidovenda.controller;
 
+
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -15,11 +16,16 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.primefaces.model.FilterMeta;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 import com.rlsp.pedidovenda.filter.PedidoFilter;
 import com.rlsp.pedidovenda.model.Pedido;
 import com.rlsp.pedidovenda.model.StatusPedido;
 import com.rlsp.pedidovenda.repository.PedidosRepository;
+
+
 
 @Named
 @ViewScoped
@@ -31,16 +37,38 @@ public class PesquisaPedidosBean implements Serializable {
 	private PedidosRepository pedidosRepostitory;
 	
 	private PedidoFilter filtro;
-	private List<Pedido> pedidosFiltrados;
+	
+	private LazyDataModel<Pedido> model;
 	
 	public PesquisaPedidosBean() {
 		filtro = new PedidoFilter();
-		pedidosFiltrados = new ArrayList<>();
+		
+		/**
+		 * Seve para fazer a pesquisa por pagina LAZY
+		 */
+		model = new LazyDataModel<Pedido>() {
+
+			private static final long serialVersionUID = 1L;
+			
+			@Override
+			public List<Pedido> load(int first, int pageSize, String sortField, SortOrder sortOrder,
+					Map<String, FilterMeta> filterBy) {
+				filtro.setPrimeiroRegistro(first);
+				filtro.setQuantidadeRegistros(pageSize);
+				filtro.setPropriedadeOrdenacao(sortField);
+				filtro.setAscendente(SortOrder.ASCENDING.equals(sortOrder));
+				
+				setRowCount(pedidosRepostitory.quantidadeFiltrados(filtro));
+				
+				return pedidosRepostitory.filtrados(filtro);
+				
+			}
+			
+			
+			
+		};
 	}
 
-	public void pesquisar() {
-		pedidosFiltrados = pedidosRepostitory.filtrados(filtro);
-	}
 	
 	public void posProcessarXls(Object documento) {
 		HSSFWorkbook planilha = (HSSFWorkbook) documento;
@@ -68,13 +96,16 @@ public class PesquisaPedidosBean implements Serializable {
 		return StatusPedido.values();//retorna um Array com a ENUMERACAO
 	}
 	
-		
-	public List<Pedido> getPedidosFiltrados() {
-		return pedidosFiltrados;
-	}
 
 	public PedidoFilter getFiltro() {
 		return filtro;
 	}
+
+	public LazyDataModel<Pedido> getModel() {
+		return model;
+	}
+
+	
+	
 	
 }
