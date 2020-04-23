@@ -6,7 +6,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.primefaces.convert.ClientConverter;
 
 import com.rlsp.pedidovenda.model.Categoria;
@@ -26,23 +28,26 @@ public class ProdutoConverter implements Converter<Object>, ClientConverter {
 	 * IMPORTANTE
 	 *  - @Inject ==> NAO FUNCIONA DENTRO DO CONVERTER/CONVERSOR
 	 */
-	//@Inject
+	@Inject
 	private ProdutosRepository produtoRepository;
 	
-	public ProdutoConverter() {
-		/**
-		 * Como a @Inject nao funciona temos que chamar o metodos getBean() na Classe CDIServiceLocator passando uma CLASSE para RETORNAR um INSTANCIA DA CLASSE no contexto da CDI
-		 */
-		produtoRepository = CDIServiceLocator.getBean(ProdutosRepository.class); 
-		
-	}
+//	public ProdutoConverter() {
+//		/**
+//		 * Como a @Inject nao funciona temos que chamar o metodos getBean() na Classe CDIServiceLocator passando uma CLASSE para RETORNAR um INSTANCIA DA CLASSE no contexto da CDI
+//		 */
+//		produtoRepository = CDIServiceLocator.getBean(ProdutosRepository.class); 
+//		
+//	}
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 				
 		Produto retorno = null;
 		
-		if(value != null) {
+		/**
+		 * StringUtils.isEmpty ==> verifica se e NULO ou VAZIO
+		 */
+		if(StringUtils.isNotEmpty(value)) {
 			Long id = Long.parseLong(value);
 			retorno = produtoRepository.porId(id);
 			

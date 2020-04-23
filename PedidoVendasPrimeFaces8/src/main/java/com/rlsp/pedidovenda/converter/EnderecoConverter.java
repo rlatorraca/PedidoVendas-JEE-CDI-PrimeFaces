@@ -4,10 +4,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.rlsp.pedidovenda.model.Endereco;
 import com.rlsp.pedidovenda.repository.EnderecosRepository;
-import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
 
 /**
  * @FacesConverter(forClass = Categoria.class)
@@ -21,16 +23,16 @@ public class EnderecoConverter implements Converter<Object> {
 	 * IMPORTANTE
 	 *  - @Inject ==> NAO FUNCIONA DENTRO DO CONVERTER/CONVERSOR
 	 */
-	//@Inject
+	@Inject
 	private EnderecosRepository enderecoRepository;
 	
-	public EnderecoConverter() {
-		/**
-		 * Como a @Inject nao funciona temos que chamar o metodos getBean() na Classe CDIServiceLocator passando uma CLASSE para RETORNAR um INSTANCIA DA CLASSE no contexto da CDI
-		 */
-		enderecoRepository = CDIServiceLocator.getBean(EnderecosRepository.class); 
-		
-	}
+//	public EnderecoConverter() {
+//		/**
+//		 * Como a @Inject nao funciona temos que chamar o metodos getBean() na Classe CDIServiceLocator passando uma CLASSE para RETORNAR um INSTANCIA DA CLASSE no contexto da CDI
+//		 */
+//		enderecoRepository = CDIServiceLocator.getBean(EnderecosRepository.class); 
+//		
+//	}
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -38,7 +40,7 @@ public class EnderecoConverter implements Converter<Object> {
 		
 		Endereco retorno = null;
 		
-		if(value != null ) {
+		if(StringUtils.isNotEmpty(value)) {
 			Long id = Long.parseLong(value);
 			retorno = enderecoRepository.porId(id);
 			

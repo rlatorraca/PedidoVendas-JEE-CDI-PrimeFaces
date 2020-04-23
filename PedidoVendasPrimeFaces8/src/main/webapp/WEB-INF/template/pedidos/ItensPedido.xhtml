@@ -16,13 +16,13 @@
 			</p:inputText>
 		</p:column>
 		
-		<p:column headerText="Produto" style="width: 95%">
+		<p:column headerText="Produto" >
 			<h:outputText value="#{item.produto.nome}" rendered="#{item.produtoAssociado}" />
 		
-			<p:autoComplete styleClass="produto-tabela" value="#{cadastroPedidoBean.produtoLinhaEditavel}"
+			<p:autoComplete styleClass="produto-tabela" value="#{cadastroPedidoBean.produtoLinhaEditavel}" 
 				completeMethod="#{cadastroPedidoBean.completarProduto}"
-				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}" 
-				forceSelection="true" rendered="#{not item.produtoAssociado}">
+				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}"  style="width: 100%;" inputStyle="width: 99%;"
+				forceSelection="true" rendered="#{not item.produtoAssociado}" inputStyleClass="autocompletar">
 				<p:ajax event="itemSelect" update="tabelaItens :frmCadastro:totalPedido :frmCadastro:subtotal"  listener="#{cadastroPedidoBean.carregarProdutoLinhaEditavel}"/>
 			</p:autoComplete>
 		</p:column>

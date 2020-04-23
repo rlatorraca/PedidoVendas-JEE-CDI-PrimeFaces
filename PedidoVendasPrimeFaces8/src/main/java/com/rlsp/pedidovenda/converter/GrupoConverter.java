@@ -4,10 +4,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.rlsp.pedidovenda.model.Grupo;
-import com.rlsp.pedidovenda.model.Produto;
-import com.rlsp.pedidovenda.model.Usuario;
 import com.rlsp.pedidovenda.repository.GruposRepository;
 import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
 
@@ -23,7 +24,7 @@ public class GrupoConverter implements Converter<Object> {
 	 * IMPORTANTE
 	 *  - @Inject ==> NAO FUNCIONA DENTRO DO CONVERTER/CONVERSOR
 	 */
-	//@Inject
+	@Inject
 	private GruposRepository grupoRepository;
 	
 	public GrupoConverter() {
@@ -39,7 +40,7 @@ public class GrupoConverter implements Converter<Object> {
 				
 		Grupo retorno = null;
 		
-		if(value != null) {
+		if(StringUtils.isNotEmpty(value)) {
 			Long id = Long.parseLong(value);
 			retorno = grupoRepository.porId(id);			
 			

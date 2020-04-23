@@ -57,7 +57,14 @@ public class CadastroProdutoBean implements Serializable {
 		
 		System.out.println("Inicializando .... Categorias em CadastroProdutoBean");
 
-		if(FacesUtil.isNotPostBack()) {
+		/**
+		 * if(FacesUtil.isNotPostBack()) ==> desnecessario pelo uso da tag do JSF <f:viewAction>, que ja tem "postBack" incluido
+		 */
+		//if(FacesUtil.isNotPostBack()) {
+			if(this.produto == null) {
+				System.out.println("Produto is null - Chamando a funcao Limpar()");
+				limpar();
+			}
 			// Se nao for PostBack (nao for a primeira vez)
 			categorias = categoriasRepository.buscarCategorias(); // Pega dentro de CategoriaRespository
 			
@@ -65,7 +72,7 @@ public class CadastroProdutoBean implements Serializable {
 			if (this.categoriaPai != null) {
 				carregarSubcategorias();
 			}
-		}
+		//}
 				
 		System.out.println("Finalizada a Inicializacao de .... Categorias");
 	}

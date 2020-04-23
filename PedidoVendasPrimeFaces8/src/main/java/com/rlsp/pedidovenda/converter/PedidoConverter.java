@@ -4,6 +4,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.rlsp.pedidovenda.model.Pedido;
 import com.rlsp.pedidovenda.repository.PedidosRepository;
@@ -17,18 +20,18 @@ import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
 @FacesConverter(forClass = Pedido.class)
 public class PedidoConverter implements Converter<Object> {
 
-	//@Inject
+	@Inject
 	private PedidosRepository pedidoRepository;
 	
-	public PedidoConverter() {
-		pedidoRepository = CDIServiceLocator.getBean(PedidosRepository.class);
-	}
+//	public PedidoConverter() {
+//		pedidoRepository = CDIServiceLocator.getBean(PedidosRepository.class);
+//	}
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Pedido retorno = null;
 		
-		if (value != null) {
+		if (StringUtils.isNotEmpty(value)) {
 			Long id = Long.parseLong(value);
 			retorno = pedidoRepository.porId(id);
 		}

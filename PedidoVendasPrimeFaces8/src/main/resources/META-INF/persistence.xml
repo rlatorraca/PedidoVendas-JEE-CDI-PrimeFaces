@@ -20,7 +20,7 @@
 		
 		<!-- ?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC > -->
 		<properties>
-		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/PedidoVendasPrimeFacesJEE8?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC"  /> 
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/PedidoVendasPrimeFacesJEE8?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC"  /> 
 		<!-- <property name="javax.persistence.jdbc.url" value="jdbc:mysql://database-mysql-instance-1.ct5xwisj8seh.us-east-1.rds.amazonaws.com/pedidoVenda?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC"  /> 
 		    <property name="javax.persistence.jdbc.user" value="admin" />
 			<property name="javax.persistence.jdbc.password" value="12345678" />  -->
@@ -36,6 +36,15 @@
 			<property name="hibernate.hbm2ddl.auto" value="update"/> 		
 			<property name="hibernate.show_sql" value="true" />			
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+			
+			
+			<property name="hibernate.c3p0.max_size" value="20" />		
+			<property name="hibernate.c3p0.min_size" value="5" />		
+			<property name="hibernate.c3p0.acquire_increment" value="1" />		
+			<property name="hibernate.c3p0.idle_test_period" value="30" />		
+			<property name="hibernate.c3p0.max_statements" value="50" />		
+			<property name="hibernate.c3p0.timeout" value="60" />
+					
 		</properties>
 	</persistence-unit>
 	

@@ -61,11 +61,24 @@
 		    <scope>provided</scope>
 		</dependency>
 
+		<!-- Apache Log4j Api -->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.13.1</version>
+		</dependency>
 		
 		<!-- Apache Log4j Core -->
 		<dependency>
 		    <groupId>org.apache.logging.log4j</groupId>
 		    <artifactId>log4j-core</artifactId>
+		    <version>2.13.1</version>
+		</dependency>
+		
+		<!-- Funciona junto com CommonsLog -->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-jcl</artifactId>
 		    <version>2.13.1</version>
 		</dependency>
 		
@@ -82,6 +95,13 @@
     		<artifactId>hibernate-core</artifactId>
     		<version>5.4.13.Final</version>
     		<scope>compile</scope>
+		</dependency>
+		
+		<!-- C3PO - controla o pool de conexoes -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-c3p0</artifactId>
+		    <version>5.4.14.Final</version>
 		</dependency>
 		
 		<!-- Entity Manager JPA Implementation - Mar 31, 2020 -->
@@ -257,6 +277,10 @@
 		    <url>http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
   		</repository>
 
+		<repository>
+			<id>JBoss repository</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
+		</repository>
 
   </repositories>
   

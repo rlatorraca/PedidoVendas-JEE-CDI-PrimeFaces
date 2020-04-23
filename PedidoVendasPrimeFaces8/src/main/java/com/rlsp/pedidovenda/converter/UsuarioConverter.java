@@ -4,10 +4,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.rlsp.pedidovenda.model.Usuario;
 import com.rlsp.pedidovenda.repository.UsuariosRepository;
-import com.rlsp.pedidovenda.util.cdi.CDIServiceLocator;
 
 /**
  * @FacesConverter(forClass = Categoria.class)
@@ -21,16 +23,16 @@ public class UsuarioConverter implements Converter<Object> {
 	 * IMPORTANTE
 	 *  - @Inject ==> NAO FUNCIONA DENTRO DO CONVERTER/CONVERSOR
 	 */
-	//@Inject
+	@Inject
 	private UsuariosRepository usuarioRepository;
 	
-	public UsuarioConverter() {
-		/**
-		 * Como a @Inject nao funciona temos que chamar o metodos getBean() na Classe CDIServiceLocator passando uma CLASSE para RETORNAR um INSTANCIA DA CLASSE no contexto da CDI
-		 */
-		usuarioRepository = CDIServiceLocator.getBean(UsuariosRepository.class); 
-		
-	}
+//	public UsuarioConverter() {
+//		/**
+//		 * Como a @Inject nao funciona temos que chamar o metodos getBean() na Classe CDIServiceLocator passando uma CLASSE para RETORNAR um INSTANCIA DA CLASSE no contexto da CDI
+//		 */
+//		usuarioRepository = CDIServiceLocator.getBean(UsuariosRepository.class); 
+//		
+//	}
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -38,7 +40,7 @@ public class UsuarioConverter implements Converter<Object> {
 		
 		Usuario retorno = null;
 		
-		if(value != null) {
+		if(StringUtils.isNotEmpty(value)) {
 			Long id = Long.parseLong(value);
 			retorno = usuarioRepository.porId(id);
 			

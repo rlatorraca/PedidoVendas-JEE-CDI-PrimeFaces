@@ -19,7 +19,7 @@ public class CadastroProdutoService implements Serializable{
 	public Produto salvar(Produto produto) throws NegocioException {
 		Produto produtoExistente = produtoRepository.produtoPorSKU(produto.getSku());
 		
-		if( produtoExistente != null && produtoExistente.getSku().equals(produto.getSku())) {
+		if( produtoExistente != null && !produtoExistente.equals(produto)) {
 			throw new NegocioException("SKU/Produto já foi cadastrado.");
 		} 
 		

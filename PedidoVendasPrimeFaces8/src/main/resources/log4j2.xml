@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+
+	<!-- appender ==>  Destinos das mensagens de Log -->
+	<Appenders>
+
+		<!-- Destino => console (Classe do log4j) -->
+		<!-- valor do alvo (destino)==> vai para os 'System.out' -->
+		<!-- layout ==> formato da saída -->
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d %-5p [%c] %m%n" />
+		</Console>
+		
+		<!-- Destino => Arquivo (Classe do log4j) Rotacionado diariamente  ${catalina.home} ==> raiz do TomCat ${jboss.server.log.dir} ==> raiz do wildfly-->
+		<!-- valor do alvo (file)==> vai para o arquivo (${catalina.home}/logs/pedido-venda.log) -->
+		<!-- layout ==> formato da saída %d = data; %-5 = tipo do erro %c = classe do erro %m = mensagem %n = quebra de linha [enters] ==> PATTERN LAYOUT CLASS (Documentation)-->
+		<RollingFile name="arquivo"
+			fileName="${jboss.server.log.dir}/logs/pedido-venda.log"
+			filePattern="${jboss.server.log.dir}/logs/pedido-venda-%d{yyyy-MM-dd}-%i.log">
+		
+		
+			<PatternLayout pattern="%d %-5p [%c] %m%n" />
+		
+			<!-- Regras de Rotacionamento do Arquivo de Log -->	
+			<Policies>
+				<!-- Diaramente rotaciona-->
+				<TimeBasedTriggeringPolicy />
+				<!-- Alcando 1 MB rotaciona -->
+				<SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	
+	
+	<!-- Nivel de Prioridade  (debug ==> INFO ==> ERROR ==> FATAL ==>)-->
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="arquivo" />
+		</Root>
+	</Loggers>
+	
+</Configuration>

@@ -114,3 +114,8 @@ footer {
 .ui-state-disabled{
 	opacity: .80 !important;
 } 
+
+#frmCadastro:j_idt68:tabelaItens:0:j_idt75_input{
+    width: 95%; !important;
+}
+
