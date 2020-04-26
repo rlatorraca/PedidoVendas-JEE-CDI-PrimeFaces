@@ -63,7 +63,8 @@ public class ClientesRepository implements Serializable{
 		 * Usando Criteria do HIBERNATE
 		 *  ** A implementacao do JPA deve ser outra
 		 */
-		Session session = ((Session)gerenciador).unwrap(Session.class);// desempacota um SESSAO do Hibernate atraves do EntityManager
+		//Session session = ((Session)gerenciador).unwrap(Session.class);// desempacota um SESSAO do Hibernate atraves do EntityManager
+		Session session = (Session) gerenciador;
 		
 		/**
 		 * Serve para incluir restricoes na pesquisa
