@@ -94,6 +94,10 @@
 		
 		<p:dialog id="inclusaoEnderecoClienteDialog" header="Inclusão de Endereço do Cliente" widgetVar="inclusaoEnderecoCliente"  modal="true" resizable="false"
 			visible="#{facesContext.validationFailed}" >
+			
+			<p:defaultCommand target="salvar-Endereco" scope="inclusaoEnderecoClienteDialog" />
+			<p:messages id="msgEnderecoClienteDialog" closable="true"/>
+			
 			<h:panelGroup id="inclusaoPainel">
 
 				<p:panelGrid columns="2" id="inclusaoEnderecoClientePanelGrid" styleClass="ui-panelgrid-blank">
@@ -125,8 +129,8 @@
 					</p:columnGroup>
 					<h:panelGroup></h:panelGroup>
 				
-				   <p:commandButton value="#{cadastroClienteBean.editandoEndereco ? 'Alterar' : 'Incluir'}" action="#{cadastroClienteBean.adicionarEndereco()}" 
-						update="enderecoAdicionadoTable inclusaoEnderecoClientePanelGrid" process="inclusaoEnderecoClientePanelGrid"
+				   <p:commandButton id="salvar-Endereco" value="#{cadastroClienteBean.editandoEndereco ? 'Alterar' : 'Incluir'}" action="#{cadastroClienteBean.adicionarEndereco()}" 
+						update="enderecoAdicionadoTable inclusaoEnderecoClientePanelGrid" process="inclusaoEnderecoClientePanelGrid msgEnderecoClienteDialog"
 						oncomplete="PF('inclusaoEnderecoCliente').hide();" style="margin: 10px 0; text-align: center">	
 						<p:resetInput target="inclusaoEnderecoClienteDialog" />					
 					</p:commandButton>	
