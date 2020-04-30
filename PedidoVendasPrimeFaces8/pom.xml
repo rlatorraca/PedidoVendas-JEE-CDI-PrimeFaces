@@ -97,6 +97,14 @@
     		<scope>compile</scope>
 		</dependency>
 		
+				<!--  Hibernate Search ORM -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-search-orm</artifactId>
+		    <version>5.11.5.Final</version>
+		    <scope>provide</scope>
+		</dependency>
+		
 		<!-- C3PO - controla o pool de conexoes -->
 		<dependency>
 		    <groupId>org.hibernate</groupId>
